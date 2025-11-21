@@ -1,18 +1,23 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-    enum Stage
-    {
-        Title, Village, Tower, Ending
-    }
-    [SerializeField] Stage currentStage = Stage.Title;
+    //enum Stage
+    //{
+    //    Title, Village, Tower, Ending
+    //}
+    //[SerializeField] Stage currentStage = Stage.Title;
+    
+    //0 : 타이틀  1 : 마을 2 : 타워 3 : 엔딩
+    [SerializeField] int curStage = 0;
 
     public PlayerModel playerModel;
     public PlayerData playerData;
 
-
+    [SerializeField] GameObject player;
+    [SerializeField] Transform playerSpawnPos;
 
     void Start()
     {
@@ -26,22 +31,36 @@ public class GameManager : Singleton<GameManager>
         
     }
 
-    public int NextScene()
+    public IEnumerator MoveScene(int move)
     {
-        currentStage++;
-        SceneManager.LoadScene((int)currentStage);
-        return (int) currentStage;
+        curStage+=move;
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(curStage);
+        Debug.Log("플레이어 소환시도");
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+
+        //yield return new WaitUntil(() => asyncLoad.isDone);
+
+
+        if (curStage > 0 || curStage < 3)
+        {
+            Instantiate(player, new Vector3(0, 1, 0), Quaternion.identity);
+            UIManager.Instance.OnOffUI(UIManager.Instance.title, true);
+            //UIManager.Instance.OnOffTitle(false);
+        }
+        else if (curStage == 0)
+        {
+            UIManager.Instance.OnOffUI(UIManager.Instance.title, false);
+        }
+
     }
-    public int PrevScene()
-    {
-        currentStage--;
-        SceneManager.LoadScene((int)currentStage);
-        return (int)currentStage;
-    }
+
     public void TitleScene()
     {
-        currentStage=Stage.Title;
-        SceneManager.LoadScene((int)currentStage);
+        curStage = 0;
+        SceneManager.LoadScene(curStage);
     }
     public void GameExit()
     {
@@ -51,6 +70,8 @@ public class GameManager : Singleton<GameManager>
     {
         SetGameData();
     }
+
+
 
     private void GetGameData()
     {

@@ -6,24 +6,15 @@ public class SceneChanger : MonoBehaviour
     int sceneNum;
     public void NextScene()
     {
-        sceneNum=GameManager.Instance.NextScene();
-        if(sceneNum==0 )
-            UIManager.Instance.OnOffTitle(true);
-        else
-            UIManager.Instance.OnOffTitle(false);
+        StartCoroutine(GameManager.Instance.MoveScene(1)); 
     }
     public void PrevScene()
     {
-        GameManager.Instance.PrevScene();
-        if (sceneNum == 0)
-            UIManager.Instance.OnOffTitle(true);
-        else
-            UIManager.Instance.OnOffTitle(false);
+        StartCoroutine(GameManager.Instance.MoveScene(-1));
     }
     public void TitleScene()
     {
         GameManager.Instance.TitleScene();
-        UIManager.Instance.OnOffTitle(true);
     }
 
     public void GameExit()

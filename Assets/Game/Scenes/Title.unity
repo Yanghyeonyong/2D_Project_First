@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 20389016}
   - component: {fileID: 20389015}
   - component: {fileID: 20389014}
+  - component: {fileID: 20389017}
   m_Layer: 5
   m_Name: Start
   m_TagString: Untagged
@@ -202,7 +203,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1868280453}
+      - m_Target: {fileID: 20389017}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: NextScene
         m_Mode: 1
@@ -252,6 +253,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 20389012}
   m_CullTransparentMesh: 1
+--- !u!114 &20389017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20389012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 066bb0169ecf2da4789d15a1bd293559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SceneChanger
 --- !u!1 &91480134
 GameObject:
   m_ObjectHideFlags: 0
@@ -1297,7 +1310,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1054674805}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1651,7 +1664,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b5ddcdbe2b8e5e04a9fa451a5e2482d7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
-  currentStage: 0
+  curStage: 0
+  playerData: {fileID: 11400000, guid: 7d5d1caab9df890448892fa987d87679, type: 2}
+  player: {fileID: 2631451431042319544, guid: a9aeee0ca3687c5488cb7f964a32c176, type: 3}
+  playerSpawnPos: {fileID: 0}
 --- !u!4 &1462544995
 Transform:
   m_ObjectHideFlags: 0
@@ -2062,7 +2078,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1868280453}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
         m_MethodName: GameExit
         m_Mode: 1
@@ -2296,10 +2312,9 @@ GameObject:
   - component: {fileID: 1868280451}
   - component: {fileID: 1868280450}
   - component: {fileID: 1868280449}
-  - component: {fileID: 1868280453}
   - component: {fileID: 1868280454}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2389,18 +2404,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1868280453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1868280448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 066bb0169ecf2da4789d15a1bd293559, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SceneChanger
 --- !u!114 &1868280454
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2414,7 +2417,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
   optionPanel: {fileID: 1292858760}
-  titleUI: {fileID: 1054674805}
+  title: {fileID: 1054674805}
 --- !u!1 &1880901709
 GameObject:
   m_ObjectHideFlags: 0

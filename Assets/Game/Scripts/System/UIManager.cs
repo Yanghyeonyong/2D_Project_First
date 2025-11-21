@@ -3,24 +3,21 @@ using UnityEngine;
 public class UIManager : Singleton<UIManager>
 {
     [SerializeField] GameObject optionPanel;
-    [SerializeField] GameObject titleUI;
-    [SerializeField] GameObject shopPanel;
+    public GameObject title;
     bool optionOpen = false;
-    bool shopOpen=false;
+    //bool shopOpen=false;
+
+    //나중에 게임에서 esc 누르면 켜지도록 설정하자
     public void OnOffOptionPanel()
     {
         optionOpen= !optionOpen;
         optionPanel.SetActive(optionOpen);
     }
 
-    public void OnOffTitle(bool active)
+    public bool OnOffUI(GameObject ui, bool active)
     {
-        titleUI.SetActive(active);
-    }
-
-    public void OnOffShop()
-    {
-        shopOpen = !shopOpen;
-        shopPanel.SetActive(shopOpen);
+        active = !active;
+        ui.SetActive(active);
+        return active;
     }
 }

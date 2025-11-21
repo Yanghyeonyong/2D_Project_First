@@ -3,6 +3,14 @@ using UnityEngine;
 public class Shopping : MonoBehaviour
 {
     [SerializeField] float[] upgradeRate;
+    [SerializeField] GameObject shopPanel;
+    bool shopOpen = false;
+
+    public void OnOffShop()
+    {
+        shopOpen = UIManager.Instance.OnOffUI(shopPanel, shopOpen);
+    }
+
     public void HpUpgrade()
     {
         GameManager.Instance.playerModel.ChangeStatus(0, upgradeRate[0]);
