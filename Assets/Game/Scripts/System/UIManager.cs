@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class UIManager : Singleton<UIManager>
 {
@@ -13,7 +14,13 @@ public class UIManager : Singleton<UIManager>
         optionOpen= !optionOpen;
         optionPanel.SetActive(optionOpen);
     }
-
+    public void onOffOptionPanel(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            optionPanel.SetActive(!optionPanel.activeSelf);
+        }
+    }
     public bool OnOffUI(GameObject ui, bool active)
     {
         active = !active;

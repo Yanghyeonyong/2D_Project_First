@@ -45,7 +45,8 @@ public class PlayerController_MVC_State : MonoBehaviour
 
     private PlayerData playerData;
     private PlayerModel playerModel;
-
+    [SerializeField] private PlayerView playerView;
+    [SerializeField] private GameObject playerInformationTab;
     private void Awake()
     {
     }
@@ -63,6 +64,8 @@ public class PlayerController_MVC_State : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
 
         //checkGround.SetAnimaotr(animator);
+        UpdateInfo();
+        GameManager.Instance.playerView= playerView;
     }
 
     // Update is called once per frame
@@ -193,5 +196,18 @@ public class PlayerController_MVC_State : MonoBehaviour
     {
         myCol.offset = originalColiderOffset;
         myCol.size = originalColiderSize;
+    }
+    
+    public void UpdateInfo()
+    {
+        playerView.UpdateStatus(playerModel);
+    }
+
+    public void OnPlayerInfo(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            playerInformationTab.SetActive(!playerInformationTab.activeSelf);
+        }
     }
 }

@@ -1,5 +1,6 @@
 using System.Collections;
 using Unity.Cinemachine;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,11 +11,12 @@ public class GameManager : Singleton<GameManager>
     //    Title, Village, Tower, Ending
     //}
     //[SerializeField] Stage currentStage = Stage.Title;
-    
+
     //0 : 타이틀  1 : 마을 2 : 타워 3 : 엔딩
     [SerializeField] int curStage = 0;
 
     public PlayerModel playerModel;
+    public PlayerView playerView;
     public PlayerData playerData;
 
     [SerializeField] GameObject player;
@@ -30,12 +32,12 @@ public class GameManager : Singleton<GameManager>
 
     void Update()
     {
-        
+
     }
 
     public IEnumerator MoveScene(int move)
     {
-        curStage+=move;
+        curStage += move;
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(curStage);
         Debug.Log("플레이어 소환시도");
         while (!asyncLoad.isDone)
@@ -48,7 +50,7 @@ public class GameManager : Singleton<GameManager>
 
         if (curStage > 0 || curStage < 3)
         {
-            GameObject myPlayer= Instantiate(player, new Vector3(0, 1, 0), Quaternion.identity);
+            GameObject myPlayer = Instantiate(player, new Vector3(0, 1, 0), Quaternion.identity);
             GameObject myCamera = Instantiate(playerCamera);
             myCamera.GetComponent<CinemachineCamera>().Target.TrackingTarget = myPlayer.transform;
             UIManager.Instance.OnOffUI(UIManager.Instance.title, true);
@@ -68,7 +70,12 @@ public class GameManager : Singleton<GameManager>
     }
     public void GameExit()
     {
-        Application.Quit();
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+            // 빌드된 애플리케이션에서는 종료합니다.
+            Application.Quit();
+#endif
     }
     private void OnApplicationQuit()
     {
@@ -80,7 +87,7 @@ public class GameManager : Singleton<GameManager>
     private void GetGameData()
     {
         playerModel = new PlayerModel(playerData.hp, playerData.mp, playerData.defence, playerData.damage,
-    playerData.attackRange, playerData.moveSpeed, playerData.jumpForce);
+    playerData.attackRange, playerData.moveSpeed, playerData.jumpForce, playerData.gold);
     }
 
     private void SetGameData()
@@ -92,5 +99,10 @@ public class GameManager : Singleton<GameManager>
         playerData.attackRange = playerModel.AttackRange;
         playerData.moveSpeed = playerModel.MoveSpeed;
         playerData.jumpForce = playerModel.JumpForce;
+
+        playerData.gold = playerModel.Gold;
+#if UNITY_EDITOR
+        EditorUtility.SetDirty(playerData);
+#endif
     }
 }

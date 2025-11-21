@@ -27,18 +27,25 @@ public class PlayerModel
     private float jumpForce;
     public float JumpForce => jumpForce;
 
+
+    private int gold = 0;
+    public int Gold=>gold;
+
     public event Action<float> OnHealthChange;
     public event Action<int> OnPlayerJump;
 
-    public PlayerModel(float maxHp, float maxMp, float defence, float damage, float attackRange, float moveSpeed, float jumpForce)
+    public PlayerModel(float maxHp, float maxMp, float defence, float damage, float attackRange, float moveSpeed, float jumpForce, int gold)
     {
         this.maxHp = maxHp;
+        curHp=maxHp;
         this.maxMp = maxMp;
+        curMp=maxMp;
         this.defence = defence;
         this.damage = damage;
         this.attackRange = attackRange;
         this.moveSpeed = moveSpeed;
         this.jumpForce = jumpForce;
+        this.gold = gold;   
     }
 
     public void Init()
@@ -57,11 +64,16 @@ public class PlayerModel
         OnHealthChange?.Invoke(curHp);
     }
 
-    //public void PlayerJump()
-    //{
-    //    jumpCount++;
-    //    OnPlayerJump?.Invoke(jumpCount);
-    //}
+    public bool BuyStatus(int usingGold)
+    {
+        if (usingGold > gold)
+            return false;
+        else
+        {
+            gold -= usingGold;
+            return true;
+        }
+    }
 
     public void ChangeStatus(int statType, float statPoint)
     {
