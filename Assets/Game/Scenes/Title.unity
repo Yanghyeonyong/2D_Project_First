@@ -1915,6 +1915,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1462544995}
   - component: {fileID: 1462544994}
+  - component: {fileID: 1462544996}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1935,8 +1936,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManager
   curStage: 0
+  playerModel:
+    maxHp: 0
+    curHp: 0
+    maxMp: 0
+    curMp: 0
+    defence: 0
+    damage: 0
+    attackRange: 0
+    moveSpeed: 0
+    jumpForce: 0
+    gold: 0
   playerView: {fileID: 0}
-  playerData: {fileID: 11400000, guid: 7d5d1caab9df890448892fa987d87679, type: 2}
+  initialPlayerData: {fileID: 11400000, guid: 7d5d1caab9df890448892fa987d87679, type: 2}
+  playerData: {fileID: 1462544996}
   player: {fileID: 2631451431042319544, guid: a9aeee0ca3687c5488cb7f964a32c176, type: 3}
   playerSpawnPos: {fileID: 0}
   playerCamera: {fileID: 3633603253027185542, guid: 8e5a382c93715de43846ed6896ccb8a5, type: 3}
@@ -1957,6 +1970,29 @@ Transform:
   - {fileID: 785238178}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1462544996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1462544993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a23b92a1b5009974eb3830263aca98c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerData_JSON
+  playerModel:
+    maxHp: 0
+    curHp: 0
+    maxMp: 0
+    curMp: 0
+    defence: 0
+    damage: 0
+    attackRange: 0
+    moveSpeed: 0
+    jumpForce: 0
+    gold: 0
 --- !u!1 &1496072336
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,6 @@
 using System;
 using UnityEngine;
-
+[System.Serializable]
 public class PlayerModel
 {
     //플레이어 스탯
@@ -15,20 +15,20 @@ public class PlayerModel
     [SerializeField] private float curMp;
     public float CurMp => curMp;
 
-    private float defence;
+    [SerializeField] private float defence;
     public float Defence => defence;
-    private float damage;
+    [SerializeField] private float damage;
     public float Damage => damage;
-    private float attackRange;
+    [SerializeField] private float attackRange;
     public float AttackRange => attackRange;
 
-    private float moveSpeed;
+    [SerializeField] private float moveSpeed;
     public float MoveSpeed => moveSpeed;
-    private float jumpForce;
+    [SerializeField] private float jumpForce;
     public float JumpForce => jumpForce;
 
 
-    private int gold = 0;
+    [SerializeField] private int gold = 0;
     public int Gold=>gold;
 
     public event Action<float> OnHealthChange;

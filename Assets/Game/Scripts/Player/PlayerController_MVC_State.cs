@@ -43,7 +43,6 @@ public class PlayerController_MVC_State : MonoBehaviour
     [SerializeField] CheckGround checkGround;
 
 
-    private PlayerData playerData;
     private PlayerModel playerModel;
     [SerializeField] private PlayerView playerView;
     [SerializeField] private GameObject playerInformationTab;
@@ -54,7 +53,6 @@ public class PlayerController_MVC_State : MonoBehaviour
     void Start()
     {
         //저장된 데이터 가져옴
-        playerData = GameManager.Instance.playerData;
         playerModel = GameManager.Instance.playerModel;
 
         myCol = GetComponent<BoxCollider2D>();
