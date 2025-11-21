@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -18,6 +19,7 @@ public class GameManager : Singleton<GameManager>
 
     [SerializeField] GameObject player;
     [SerializeField] Transform playerSpawnPos;
+    [SerializeField] GameObject playerCamera;
 
     void Start()
     {
@@ -46,7 +48,9 @@ public class GameManager : Singleton<GameManager>
 
         if (curStage > 0 || curStage < 3)
         {
-            Instantiate(player, new Vector3(0, 1, 0), Quaternion.identity);
+            GameObject myPlayer= Instantiate(player, new Vector3(0, 1, 0), Quaternion.identity);
+            GameObject myCamera = Instantiate(playerCamera);
+            myCamera.GetComponent<CinemachineCamera>().Target.TrackingTarget = myPlayer.transform;
             UIManager.Instance.OnOffUI(UIManager.Instance.title, true);
             //UIManager.Instance.OnOffTitle(false);
         }

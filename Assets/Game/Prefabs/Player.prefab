@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 658356356072700742}
   - component: {fileID: 6937891164879172212}
   - component: {fileID: 1932360313543776288}
-  - component: {fileID: 3496595840865997074}
+  - component: {fileID: 1614956756416912271}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -28,15 +28,15 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2631451431042319544}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: 0, y: 0.33, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 925677339909316522}
   - {fileID: 3346867212801989077}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &658356356072700742
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -137,8 +137,8 @@ MonoBehaviour:
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3496595840865997074}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 1614956756416912271}
+        m_TargetAssemblyTypeName: PlayerController_MVC_State, Assembly-CSharp
         m_MethodName: OnMove
         m_Mode: 0
         m_Arguments:
@@ -157,8 +157,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Look[/Mouse/delta]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3496595840865997074}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 1614956756416912271}
+        m_TargetAssemblyTypeName: PlayerController_MVC_State, Assembly-CSharp
         m_MethodName: OnAttack
         m_Mode: 0
         m_Arguments:
@@ -177,8 +177,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Interact[/Keyboard/e]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3496595840865997074}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 1614956756416912271}
+        m_TargetAssemblyTypeName: PlayerController_MVC_State, Assembly-CSharp
         m_MethodName: OnCrouch
         m_Mode: 0
         m_Arguments:
@@ -193,8 +193,8 @@ MonoBehaviour:
     m_ActionName: 'Player/Crouch[/Keyboard/c]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3496595840865997074}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
+      - m_Target: {fileID: 1614956756416912271}
+        m_TargetAssemblyTypeName: PlayerController_MVC_State, Assembly-CSharp
         m_MethodName: OnJump
         m_Mode: 0
         m_Arguments:
@@ -264,7 +264,7 @@ MonoBehaviour:
   m_DefaultActionMap: 
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &3496595840865997074
+--- !u!114 &1614956756416912271
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -273,12 +273,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2631451431042319544}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bcfd910e89c99024295e9340da1f52af, type: 3}
+  m_Script: {fileID: 11500000, guid: 5a429c6c5544eca439d35f6f51374d5a, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController_MVC_State
   animator: {fileID: 3347803370455552518}
-  moveSpeed: 4
-  jumpForce: 8
   downJump: 3
   superJumpDelay: 3
   crouchColiderOffset: {x: 0, y: 0.5010952}
