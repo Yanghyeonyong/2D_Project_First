@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
@@ -46,8 +47,15 @@ public class PlayerController_MVC_State : MonoBehaviour
     private PlayerModel playerModel;
     [SerializeField] private PlayerView playerView;
     [SerializeField] private GameObject playerInformationTab;
+
+    [SerializeField] SpriteRenderer spriteRenderer;
+    [SerializeField] Color originColor;
+    [SerializeField] Color hitColor;
+    [SerializeField] float hitTime;
+    WaitForSeconds changeTime;
     private void Awake()
     {
+        changeTime=new WaitForSeconds(hitTime);
     }
 
     void Start()
@@ -64,6 +72,9 @@ public class PlayerController_MVC_State : MonoBehaviour
         //checkGround.SetAnimaotr(animator);
         UpdateInfo();
         GameManager.Instance.playerView= playerView;
+
+
+        originColor=spriteRenderer.color;
     }
 
     // Update is called once per frame
@@ -140,7 +151,25 @@ public class PlayerController_MVC_State : MonoBehaviour
         if (ctx.performed && !isCrouch)
         {
             animator.SetTrigger("IsAttack");
+            CheckEnemy();
         }
+    }
+
+    //플레이어가 레이 범위에 있는지 체크
+    public LayerMask layerMask;
+    [SerializeField] float attackRange;
+    [SerializeField] float attackPosY = 1.3f;
+    [SerializeField] float attackBoxSize=2.6f;
+    private void CheckEnemy()
+    {
+        attackRange = playerModel.AttackRange;
+
+        RaycastHit2D[] hit = Physics2D.BoxCastAll(transform.position + new Vector3(0,attackPosY,0), new Vector2(1, attackBoxSize), 0, transform.right, attackRange, layerMask);
+        foreach (RaycastHit2D enemy in hit)
+        {
+            Debug.Log(enemy.collider.gameObject.name);
+        }
+
     }
 
     //엎드리기
@@ -196,6 +225,7 @@ public class PlayerController_MVC_State : MonoBehaviour
         myCol.size = originalColiderSize;
     }
     
+    //플레이어 정보 확인
     public void UpdateInfo()
     {
         playerView.UpdateStatus(playerModel);
@@ -208,4 +238,42 @@ public class PlayerController_MVC_State : MonoBehaviour
             playerInformationTab.SetActive(!playerInformationTab.activeSelf);
         }
     }
+
+
+    //데미지를 입었을 경우 발생하는 메서드
+    public void TestTakeDamage(InputAction.CallbackContext ctx)
+    {
+        if (ctx.started)
+        {
+            OnTakeDamage(31f);
+        }
+    }
+
+    private Coroutine damgageCoroutine;
+    public void OnTakeDamage(float takeDamage)
+    {
+        playerModel.TakeDamage(takeDamage);
+        if (damgageCoroutine == null)
+        {
+            damgageCoroutine = StartCoroutine(TakeDamageCharacter());
+        }
+        else
+        {
+            StopCoroutine(damgageCoroutine);
+            damgageCoroutine = StartCoroutine(TakeDamageCharacter());
+        }
+        UpdateInfo();
+    }
+    IEnumerator TakeDamageCharacter()
+    {
+        for (int i = 0; i < 2; i++)
+        {
+            spriteRenderer.color = hitColor;
+            yield return changeTime;
+            spriteRenderer.color = originColor;
+            yield return changeTime;
+        }
+    }
+
+
 }

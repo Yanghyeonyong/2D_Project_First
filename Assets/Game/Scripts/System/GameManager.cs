@@ -41,7 +41,6 @@ public class GameManager : Singleton<GameManager>
     {
         curStage += move;
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(curStage);
-        Debug.Log("플레이어 소환시도");
         while (!asyncLoad.isDone)
         {
             yield return null;

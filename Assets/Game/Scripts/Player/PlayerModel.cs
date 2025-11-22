@@ -54,9 +54,10 @@ public class PlayerModel
         curMp = maxMp;
     }
 
-    public void TakeDamage(float amount)
+    public void TakeDamage(float takeDamage)
     {
-        curHp -= amount;
+        //방어력으로 인한 피격 데미지 감소
+        curHp -= Mathf.Max(0,takeDamage-defence);
         if (curHp <= 0)
         {
             curHp = 0;

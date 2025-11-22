@@ -508,6 +508,26 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: dd0cfade-392e-4e3c-b98e-8ac87a09c51b
     m_ActionName: 'Player/PlayerInformation[/Keyboard/l]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1b297c1b-3c6f-49dd-9d92-1bca6ee4deac
+    m_ActionName: 'UI/Option[/Keyboard/escape]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1614956756416912271}
+        m_TargetAssemblyTypeName: PlayerController_MVC_State, Assembly-CSharp
+        m_MethodName: TestTakeDamage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 3098e894-039c-4f9b-825f-92bd48c7f01a
+    m_ActionName: 'Player/Test[/Keyboard/0]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 
@@ -533,6 +553,16 @@ MonoBehaviour:
   checkGround: {fileID: 6512455271159112056}
   playerView: {fileID: 8000799539255185582}
   playerInformationTab: {fileID: 3733386365343193049}
+  spriteRenderer: {fileID: 6512677350406222467}
+  originColor: {r: 1, g: 1, b: 1, a: 1}
+  hitColor: {r: 0.39215687, g: 0.39215687, b: 0.39215687, a: 1}
+  hitTime: 0.1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  attackRange: 0
+  attackPosY: 5
+  attackBoxSize: 3
 --- !u!1 &3122573438576116077
 GameObject:
   m_ObjectHideFlags: 0
