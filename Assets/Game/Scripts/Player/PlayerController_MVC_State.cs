@@ -44,7 +44,7 @@ public class PlayerController_MVC_State : MonoBehaviour
     [SerializeField] CheckGround checkGround;
 
 
-    private PlayerModel playerModel;
+    public PlayerModel playerModel;
     [SerializeField] private PlayerView playerView;
     [SerializeField] private GameObject playerInformationTab;
 
