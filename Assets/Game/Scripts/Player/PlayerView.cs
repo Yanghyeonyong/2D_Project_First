@@ -4,7 +4,17 @@ using UnityEngine.UI;
 public class PlayerView : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI[] statusTexts;
+    [SerializeField] Image hpBanner;
+    [SerializeField] Image mpBanner;
 
+    public void UpdatePlayerHP(float amount)
+    {
+        hpBanner.fillAmount = amount;
+    }
+    public void UpdatePlayerMP(float amount)
+    {
+        mpBanner.fillAmount = amount;
+    }
 
     public void UpdateStatus(PlayerModel playerModel)
     {

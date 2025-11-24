@@ -53,9 +53,15 @@ public class PlayerController_MVC_State : MonoBehaviour
     [SerializeField] Color hitColor;
     [SerializeField] float hitTime;
     WaitForSeconds changeTime;
+
+
+    [SerializeField] GameObject playerFaceCamera;
+    Vector3 originCameraPos;
+    [SerializeField] Vector3 crouchCameraPos;
     private void Awake()
     {
         changeTime=new WaitForSeconds(hitTime);
+        originCameraPos = playerFaceCamera.transform.localPosition;
     }
 
     void Start()
@@ -172,6 +178,7 @@ public class PlayerController_MVC_State : MonoBehaviour
 
     }
 
+
     //엎드리기
     public void OnCrouch(InputAction.CallbackContext ctx)
     {
@@ -182,7 +189,7 @@ public class PlayerController_MVC_State : MonoBehaviour
             SetCrouchColider();
             isCrouch = true;
             animator.SetBool("IsCrouch", true);
-
+            playerFaceCamera.transform.localPosition = crouchCameraPos;
             superJumpCoroutine = StartCoroutine(SuperJump());
         }
 
@@ -194,7 +201,7 @@ public class PlayerController_MVC_State : MonoBehaviour
 
             isCrouch = false;
             animator.SetBool("IsCrouch", false);
-
+            playerFaceCamera.transform.localPosition = originCameraPos;
             //슈퍼점프 아직 못했으면 중단
             if (superJumpCoroutine != null)
             {
@@ -263,6 +270,7 @@ public class PlayerController_MVC_State : MonoBehaviour
             damgageCoroutine = StartCoroutine(TakeDamageCharacter());
         }
         UpdateInfo();
+        playerView.UpdatePlayerHP(playerModel.CurHp/playerModel.MaxHp);
     }
     IEnumerator TakeDamageCharacter()
     {
