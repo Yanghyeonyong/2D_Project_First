@@ -81,6 +81,8 @@ public class PlayerController_MVC_State : MonoBehaviour
 
 
         originColor=spriteRenderer.color;
+
+        playerView.UpdatePlayerHP(playerModel.CurHp / playerModel.MaxHp);
     }
 
     // Update is called once per frame
@@ -157,7 +159,11 @@ public class PlayerController_MVC_State : MonoBehaviour
         if (ctx.performed && !isCrouch)
         {
             animator.SetTrigger("IsAttack");
-            CheckEnemy();
+            RaycastHit2D[] hit = CheckEnemy();
+            foreach (RaycastHit2D enemy in hit)
+            {
+                enemy.collider.gameObject.GetComponent<EnemyController>().OnTakeDamage(playerModel.Damage);
+            }
         }
     }
 
@@ -166,15 +172,16 @@ public class PlayerController_MVC_State : MonoBehaviour
     [SerializeField] float attackRange;
     [SerializeField] float attackPosY = 1.3f;
     [SerializeField] float attackBoxSize=2.6f;
-    private void CheckEnemy()
+    private RaycastHit2D[] CheckEnemy()
     {
         attackRange = playerModel.AttackRange;
 
         RaycastHit2D[] hit = Physics2D.BoxCastAll(transform.position + new Vector3(0,attackPosY,0), new Vector2(1, attackBoxSize), 0, transform.right, attackRange, layerMask);
-        foreach (RaycastHit2D enemy in hit)
-        {
-            Debug.Log(enemy.collider.gameObject.name);
-        }
+        //foreach (RaycastHit2D enemy in hit)
+        //{
+        //    Debug.Log(enemy.collider.gameObject.name);
+        //}
+        return hit;
 
     }
 
@@ -236,6 +243,7 @@ public class PlayerController_MVC_State : MonoBehaviour
     public void UpdateInfo()
     {
         playerView.UpdateStatus(playerModel);
+        playerView.UpdatePlayerHP(playerModel.CurHp / playerModel.MaxHp);
     }
 
     public void OnPlayerInfo(InputAction.CallbackContext ctx)
