@@ -91,7 +91,7 @@ public class PlayerController_State : MonoBehaviour
     private void Start()
     {
         //저장된 데이터 가져옴
-        playerModel = GameManager.Instance.playerModel;
+        //playerModel = GameManager.Instance.playerModel;
         myCol = GetComponent<BoxCollider2D>();
         originalColiderOffset = myCol.offset;
         originalColiderSize = myCol.size;
@@ -184,53 +184,16 @@ public class PlayerController_State : MonoBehaviour
         //Idle 애니메이션 상태에서만 실행하라
         if (ctx.performed && animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
         {
-            ////콜라이더 조정
-            //SetCrouchColider();
             isCrouch = true;
-            //animator.SetBool("IsCrouch", true);
-            //playerFaceCamera.transform.localPosition = crouchCameraPos;
-            //superJumpCoroutine = StartCoroutine(SuperJump());
             SetState(new CrouchState(this));
         }
-
         //엎드리기 해제
         if (ctx.canceled)
         {
-            //콜라이더 복구
-            //InitColider();
             SetState(new IdleState(this));
             isCrouch = false;
-            //animator.SetBool("IsCrouch", false);
-            //playerFaceCamera.transform.localPosition = originCameraPos;
-            ////슈퍼점프 아직 못했으면 중단
-            //if (superJumpCoroutine != null)
-            //{
-            //    StopCoroutine(superJumpCoroutine);
-            //}
         }
     }
-
-    ////일정 시간 웅크리고 있으면 슈퍼점프
-    //IEnumerator SuperJump()
-    //{
-    //    yield return new WaitForSeconds(superJumpDelay);
-    //    animator.SetBool("IsCrouch", false);
-    //    rb.AddForce(Vector2.up * playerModel.JumpForce * 2f, ForceMode2D.Impulse);
-    //}
-
-    ////엎드린 상태에서는 콜라이더 작아지도록
-    //private void SetCrouchColider()
-    //{
-    //    myCol.offset = crouchColiderOffset;
-    //    myCol.size = crouchColiderSize;
-    //}
-
-    ////콜라이더 원상 복구
-    //private void InitColider()
-    //{
-    //    myCol.offset = originalColiderOffset;
-    //    myCol.size = originalColiderSize;
-    //}
 
     //플레이어 정보 확인
     public void UpdateInfo()
