@@ -6,10 +6,10 @@ public class EnemyController : MonoBehaviour
 {
 
     [SerializeField] private EnemyView enemyView;
-    private EnemyModel enemyModel;
+    public EnemyModel enemyModel;
     private void OnEnable()
     {
-        enemyModel = new EnemyModel(1000);
+        enemyModel = new EnemyModel(1000, 100);
         EnemyInit();
     }
     private void EnemyInit()
@@ -19,8 +19,15 @@ public class EnemyController : MonoBehaviour
 
     public void OnTakeDamage(float takeDamage)
     {
-        enemyModel.TakeDamage(takeDamage);
-        enemyView.UpdateEnemyHP(enemyModel.CurHp/enemyModel.MaxHp);
+        if (enemyModel.TakeDamage(takeDamage))
+        {
+            enemyView.UpdateEnemyHP(enemyModel.CurHp / enemyModel.MaxHp);
+        }
+        else
+        {
+            enemyView.UpdateEnemyHP(enemyModel.CurHp / enemyModel.MaxHp);
+            gameObject.SetActive(false);
+        }
     }
 
     public LayerMask layerMask;
