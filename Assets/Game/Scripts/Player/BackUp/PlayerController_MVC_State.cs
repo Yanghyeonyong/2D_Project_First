@@ -67,7 +67,8 @@ public class PlayerController_MVC_State : MonoBehaviour
     void Start()
     {
         //저장된 데이터 가져옴
-        playerModel = GameManager.Instance.playerModel;
+        //playerModel = GameManager.Instance.playerModel;
+        playerModel = new PlayerModel(100, 100, 100, 100, 10, 5, 5, 10000);
 
         myCol = GetComponent<BoxCollider2D>();
         originalColiderOffset = myCol.offset;

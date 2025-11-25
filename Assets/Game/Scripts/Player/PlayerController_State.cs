@@ -86,10 +86,15 @@ public class PlayerController_State : MonoBehaviour
         originCameraPos = playerFaceCamera.transform.localPosition;
     }
 
+    public bool onTest=false;
+
     private void Start()
     {
         //저장된 데이터 가져옴
-        playerModel = GameManager.Instance.playerModel;
+        if (!onTest)
+        {
+            playerModel = GameManager.Instance.playerModel;
+        }
         if (GameManager.Instance.curStage == 2)
         {
             playerModel_Dongeon = GameManager.Instance.playerModel_Dongeon;

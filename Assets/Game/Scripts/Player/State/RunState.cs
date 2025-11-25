@@ -29,7 +29,8 @@ public class RunState : IPlayerState
     //종료 시 운동량 0, 애니메이션 종료
     public void OnExit()
     {
-        rb.linearVelocity = Vector2.zero;
+        //rb.linearVelocity = Vector2.zero;
+        rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
         _anim.SetBool("IsWalk", false);
     }
 

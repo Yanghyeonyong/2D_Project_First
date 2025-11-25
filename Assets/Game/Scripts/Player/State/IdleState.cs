@@ -19,7 +19,8 @@ public class IdleState : IPlayerState
     {
         if (_player.MoveDir.x == 0)
         {
-            rb.linearVelocity = Vector2.zero;
+            //rb.linearVelocity = Vector2.zero;
+            rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
         }
         else
         {
