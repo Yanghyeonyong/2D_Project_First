@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -13,12 +14,15 @@ public class Bullet : MonoBehaviour
     {
         transform.Translate(Vector2.right * Time.deltaTime);
     }
+
+    Coroutine playerAttakck;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer==8)
         {
             Debug.Log("´ê¾Ò´Ù.");
-            collision.gameObject.GetComponent<PlayerController_State>().OnTakeDamage(31f);
+            collision.gameObject.GetComponent<PlayerController_State>().OnTakeDamage(13f);
         }
     }
+
 }

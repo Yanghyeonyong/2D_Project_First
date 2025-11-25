@@ -18,12 +18,14 @@ public class JumpState : IPlayerState
         _player = player;
         _anim = player.Anim;
         rb = player.Rb;
-        jumpForce = player.playerModel.JumpForce;
+        //jumpForce = player.playerModel.JumpForce;
+        jumpForce = player.playerModel_Dongeon.ReturnTotalStatus(4);
 
         moveDir = player.MoveDir;
         _anim = player.Anim;
         rb = player.Rb;
-        moveSpeed = player.playerModel.MoveSpeed;
+        //moveSpeed = player.playerModel.MoveSpeed;
+        moveSpeed = player.playerModel_Dongeon.ReturnTotalStatus(3);
     }
 
 
@@ -38,7 +40,7 @@ public class JumpState : IPlayerState
         _anim.SetTrigger("IsJump");
 
         //위로 점프
-        rb.AddForce(Vector2.up * _player.playerModel.JumpForce, ForceMode2D.Impulse);
+        rb.AddForce(Vector2.up * _player.playerModel_Dongeon.ReturnTotalStatus(4), ForceMode2D.Impulse);
     }
 
     public void OnExit()
@@ -66,7 +68,8 @@ public class JumpState : IPlayerState
         }
 
 
-        rb.linearVelocity = new Vector2(moveDir.x * moveSpeed, rb.linearVelocity.y);
+        //rb.linearVelocity = new Vector2(moveDir.x * moveSpeed, rb.linearVelocity.y);
+        rb.linearVelocity = new Vector2(moveDir.x * _player.playerModel_Dongeon.ReturnTotalStatus(3), rb.linearVelocity.y);
 
         //플레이어가 땅에 닿았으면 idle로 전환
         if (_player.IsGrounded &&jumpFinish)

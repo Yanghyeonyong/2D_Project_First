@@ -34,16 +34,12 @@ public class PlayerController_State : MonoBehaviour
     //슈퍼점프까지 걸리는 시간
     [SerializeField] float superJumpDelay = 3f;
     public float SuperJumpDelay => superJumpDelay;
-    //슈퍼점프를 실행하는 코루틴
-    Coroutine superJumpCoroutine;
-
 
     //가만히 있는 상태에서만 가능
     //웅크리고 있는 상태일 때(공격, 이동 불가능 아랫점, 슈퍼 윗점 가능이며 아랫점의 경우 아랫키 + 점프일 경우, 슈퍼 윗점의 경우 아랫점 일정시간 경과 후)
     bool isCrouch = false;
     public bool IsCrouch => isCrouch;
 
-    //땅에 닿았는지 체크를 위해 작성하였으나, 이후 머리가 땅에 닿아서 활성화되어 다른 스크립트로 이관
     //캐릭터의 발 쪽에만 따로 콜라이더 설정
     bool isGrounded = false;
     public bool IsGrounded => isGrounded;
@@ -67,6 +63,8 @@ public class PlayerController_State : MonoBehaviour
     public PlayerModel playerModel;
     [SerializeField] private PlayerView playerView;
     [SerializeField] private GameObject playerInformationTab;
+    public PlayerModel_Dongeon playerModel_Dongeon;
+
 
     [SerializeField] SpriteRenderer spriteRenderer;
     [SerializeField] Color originColor;
@@ -91,7 +89,16 @@ public class PlayerController_State : MonoBehaviour
     private void Start()
     {
         //저장된 데이터 가져옴
-        //playerModel = GameManager.Instance.playerModel;
+        playerModel = GameManager.Instance.playerModel;
+        if (GameManager.Instance.curStage == 2)
+        {
+            playerModel_Dongeon = GameManager.Instance.playerModel_Dongeon;
+        }
+        else
+        {
+            playerModel_Dongeon = new PlayerModel_Dongeon(playerModel);
+        }
+
         myCol = GetComponent<BoxCollider2D>();
         originalColiderOffset = myCol.offset;
         originalColiderSize = myCol.size;
@@ -161,7 +168,7 @@ public class PlayerController_State : MonoBehaviour
     public void OnJump(InputAction.CallbackContext ctx)
     {
         //땅에 닿았을 때만
-        if (ctx.performed&&isGrounded)
+        if (ctx.performed && isGrounded)
         {
             SetState(new JumpState(this));
         }
@@ -198,7 +205,14 @@ public class PlayerController_State : MonoBehaviour
     //플레이어 정보 확인
     public void UpdateInfo()
     {
-        playerView.UpdateStatus(playerModel);
+        if (GameManager.Instance.curStage != 2)
+        {
+            playerView.UpdateStatus(playerModel);
+        }
+        else
+        {
+            playerView.UpdateStatus(playerModel, playerModel_Dongeon);
+        }
         playerView.UpdatePlayerHP(playerModel.CurHp / playerModel.MaxHp);
     }
 
@@ -210,20 +224,29 @@ public class PlayerController_State : MonoBehaviour
         }
     }
 
-
+    [SerializeField] int testExp;
     //데미지를 입었을 경우 발생하는 메서드
     public void TestTakeDamage(InputAction.CallbackContext ctx)
     {
         if (ctx.started)
         {
-            OnTakeDamage(31f);
+            //OnTakeDamage(31f);
+            LevelUp(testExp);
         }
     }
+
 
     private Coroutine damgageCoroutine;
     public void OnTakeDamage(float takeDamage)
     {
-        playerModel.TakeDamage(takeDamage);
+        if (GameManager.Instance.curStage == 2)
+        {
+            playerModel_Dongeon.TakeDamage(takeDamage);
+        }
+        else
+        {
+            playerModel.TakeDamage(takeDamage);
+        }
         if (damgageCoroutine == null)
         {
             damgageCoroutine = StartCoroutine(TakeDamageCharacter());
@@ -244,6 +267,16 @@ public class PlayerController_State : MonoBehaviour
             yield return changeTime;
             spriteRenderer.color = originColor;
             yield return changeTime;
+        }
+    }
+
+    public void LevelUp(int exp)
+    {
+        int levelUpCount = playerModel_Dongeon.LevelUp(exp);
+        if (levelUpCount > 0)
+        {
+            Debug.Log("스탯 올려야징");
+            playerView.LevelUpPageOpen(levelUpCount);
         }
     }
 }

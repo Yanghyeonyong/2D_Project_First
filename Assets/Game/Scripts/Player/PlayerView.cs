@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,6 +7,7 @@ public class PlayerView : MonoBehaviour
     [SerializeField] private TextMeshProUGUI[] statusTexts;
     [SerializeField] Image hpBanner;
     [SerializeField] Image mpBanner;
+    [SerializeField] GameObject levelUpPage;
 
     public void UpdatePlayerHP(float amount)
     {
@@ -28,32 +30,35 @@ public class PlayerView : MonoBehaviour
         statusTexts[7].text = $"{playerModel.Gold}$";
 
     }
-    //public void UpdateHpUI(float curHp, float maxHp)
-    //{
-    //    statusTexts[0].text = $"HP: {curHp} / {maxHp}";
-    //}
-    //public void UpdateMpUI(float curMp, float maxMp)
-    //{
-    //    statusTexts[1].text = $"MP: {curMp} / {maxMp}";
-    //}
-    //public void UpdateDefenceUI(float defence)
-    //{
-    //    statusTexts[2].text = $"defence: {defence}";
-    //}
-    //public void UpdateDamageUI(float damage)
-    //{
-    //    statusTexts[3].text = $"Damage: {damage}";
-    //}
-    //public void UpdateAttackRangeUI(float attackRange)
-    //{
-    //    statusTexts[4].text = $"AttackRange: {attackRange}";
-    //}
-    //public void UpdateMoveSpeedUI(float speed)
-    //{
-    //    statusTexts[5].text = $"Speed: {speed}";
-    //}
-    //public void UpdateJumpForceUI(float jumpForce)
-    //{
-    //    statusTexts[6].text = $"jump: {jumpForce}";
-    //}
+    public void UpdateStatus(PlayerModel playerModel, PlayerModel_Dongeon playerModel_Dongeon)
+    {
+        statusTexts[0].text = $"HP: {playerModel.CurHp} / {playerModel.MaxHp}";
+        statusTexts[1].text = $"MP: {playerModel.CurMp} / {playerModel.MaxMp}";
+        statusTexts[2].text = $"Def: {playerModel.Defence} + {playerModel_Dongeon.Defence}";
+        statusTexts[3].text = $"Att: {playerModel.Damage} + {playerModel_Dongeon.Damage}";
+        statusTexts[4].text = $"AttackRange: {playerModel.AttackRange} + {playerModel_Dongeon.AttackRange}";
+        statusTexts[5].text = $"Speed: {playerModel.MoveSpeed} + {playerModel_Dongeon.MoveSpeed}";
+        statusTexts[6].text = $"Jump: {playerModel.JumpForce} + {playerModel_Dongeon.JumpForce}";
+        statusTexts[7].text = $"{playerModel.Gold}$";
+    }
+
+    public void LevelUpPageOpen(int levelUpCount)
+    {
+        Debug.Log("여기까지 왔다");
+        //levelUpPage.SetActive(true);
+        StartCoroutine(LevelUp(levelUpCount));
+    }
+
+    IEnumerator LevelUp(int levelUpCount)
+    {
+        Debug.Log("코루틴 시작");
+        while (levelUpCount > 0)
+        {
+            Debug.Log(levelUpCount+"번째");
+            //yield return !levelUpPage.activeSelf;
+            yield return new WaitUntil(() => !levelUpPage.activeSelf);
+            levelUpPage.SetActive(true);
+            levelUpCount--;
+        }
+    }
 }

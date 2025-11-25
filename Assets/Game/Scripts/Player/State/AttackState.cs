@@ -25,7 +25,8 @@ public class AttackState : IPlayerState
         RaycastHit2D[] hit = CheckEnemy();
         foreach (RaycastHit2D enemy in hit)
         {
-            enemy.collider.gameObject.GetComponent<EnemyController>().OnTakeDamage(_player.playerModel.Damage);
+            //enemy.collider.gameObject.GetComponent<EnemyController>().OnTakeDamage(_player.playerModel.Damage);
+            enemy.collider.gameObject.GetComponent<EnemyController>().OnTakeDamage(_player.playerModel_Dongeon.ReturnTotalStatus(1));
         }
     }
 
@@ -40,11 +41,16 @@ public class AttackState : IPlayerState
     //플레이어가 레이 범위에 있는지 체크
     private RaycastHit2D[] CheckEnemy()
     {
+        //RaycastHit2D[] hit = Physics2D.BoxCastAll(
+        //    _player.transform.position + new Vector3(0, attackPosY, 0),
+        //    new Vector2(1, attackBoxSize),
+        //    0, _player.transform.right, 
+        //    _player.playerModel.AttackRange, layerMask);
         RaycastHit2D[] hit = Physics2D.BoxCastAll(
             _player.transform.position + new Vector3(0, attackPosY, 0),
             new Vector2(1, attackBoxSize),
-            0, _player.transform.right, 
-            _player.playerModel.AttackRange, layerMask);
+            0, _player.transform.right,
+            _player.playerModel_Dongeon.ReturnTotalStatus(2), layerMask);
         return hit;
     }
 }

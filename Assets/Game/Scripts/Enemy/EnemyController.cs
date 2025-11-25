@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
@@ -40,6 +41,7 @@ public class EnemyController : MonoBehaviour
 
         if (hit.collider != null)
         {
+            Debug.Log("Ã£¾Ò´Ù");
             return true;
         }
         else
@@ -52,8 +54,30 @@ public class EnemyController : MonoBehaviour
     {
         if (CheckPlayer())
         {
-            GameObject mybullet= Instantiate(bullet, transform);
-            mybullet.transform.SetParent(null);
+            if (spawnBullet == null)
+            {
+                spawnBullet=StartCoroutine(SpawnBullet());
+            }
+        }
+        else
+        {
+            if (spawnBullet != null)
+            {
+                StopCoroutine(spawnBullet);
+            }
+                spawnBullet = null;
+        }
+    }
+
+    Coroutine spawnBullet;
+    IEnumerator SpawnBullet()
+    {
+        while (true)
+        {
+
+            GameObject mybullet = Instantiate(bullet, transform.position, transform.rotation);
+            //mybullet.transform.SetParent(null);
+            yield return new WaitForSeconds(1f);
         }
     }
 }

@@ -15,7 +15,8 @@ public class RunState : IPlayerState
         moveDir = player.MoveDir;
         _anim = player.Anim;
         rb = player.Rb;
-        moveSpeed = player.playerModel.MoveSpeed;
+        //moveSpeed = player.playerModel.MoveSpeed;
+        moveSpeed = player.playerModel_Dongeon.ReturnTotalStatus(3);
     }
 
     //이동 시 애니메이션 적용
@@ -46,6 +47,7 @@ public class RunState : IPlayerState
         }
 
         //입력하는 경우 이동
+        //rb.linearVelocity = new Vector2(moveDir.x * moveSpeed, rb.linearVelocity.y);
         rb.linearVelocity = new Vector2(moveDir.x * moveSpeed, rb.linearVelocity.y);
 
         //입력값 0이면 상태 변환

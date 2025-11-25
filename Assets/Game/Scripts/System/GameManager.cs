@@ -14,9 +14,11 @@ public class GameManager : Singleton<GameManager>
     //[SerializeField] Stage currentStage = Stage.Title;
 
     //0 : 타이틀  1 : 마을 2 : 타워 3 : 엔딩
-    [SerializeField] int curStage = 0;
+    public int curStage = 0;
 
     public PlayerModel playerModel;
+    //이건 던전에서 레벨업 스탯(나오면 초기화됨)
+    public PlayerModel_Dongeon playerModel_Dongeon;
     public PlayerView playerView;
     public PlayerData initialPlayerData;
     public PlayerData_JSON playerData;
@@ -49,8 +51,9 @@ public class GameManager : Singleton<GameManager>
         //yield return new WaitUntil(() => asyncLoad.isDone);
 
 
-        if (curStage > 0 || curStage < 3)
+        if (curStage > 0 && curStage < 3)
         {
+            Debug.Log("플레이어 소화ㅏㅏㅏㅏㅏㅏㅏㄴ");
             GameObject myPlayer = Instantiate(player, new Vector3(0, 1, 0), Quaternion.identity);
             GameObject myCamera = Instantiate(playerCamera);
             myCamera.GetComponent<CinemachineCamera>().Target.TrackingTarget = myPlayer.transform;
@@ -60,6 +63,15 @@ public class GameManager : Singleton<GameManager>
         else if (curStage == 0)
         {
             UIManager.Instance.OnOffUI(UIManager.Instance.title, false);
+        }
+
+        if (curStage == 2)
+        {
+            playerModel_Dongeon = new PlayerModel_Dongeon(playerModel);
+        }
+        else
+        {
+            playerModel_Dongeon = null;
         }
 
     }

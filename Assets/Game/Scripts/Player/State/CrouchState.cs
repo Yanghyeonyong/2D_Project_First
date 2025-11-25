@@ -98,7 +98,8 @@ public class CrouchState : MonoBehaviour, IPlayerState
                 _anim.SetBool("IsCrouch", false);
                 //애니메이션 실행
                 _anim.SetTrigger("IsJump");
-                rb.AddForce(Vector2.up * _player.playerModel.JumpForce * 2f, ForceMode2D.Impulse);
+                //rb.AddForce(Vector2.up * _player.playerModel.JumpForce * 2f, ForceMode2D.Impulse);
+                rb.AddForce(Vector2.up * _player.playerModel_Dongeon.ReturnTotalStatus(4) * 2f, ForceMode2D.Impulse);
                 isSuperJump = true;
 
                 InitColider();
@@ -124,7 +125,8 @@ public class CrouchState : MonoBehaviour, IPlayerState
             }
 
 
-            rb.linearVelocity = new Vector2(moveDir.x * moveSpeed, rb.linearVelocity.y);
+            //rb.linearVelocity = new Vector2(moveDir.x * moveSpeed, rb.linearVelocity.y);
+            rb.linearVelocity = new Vector2(moveDir.x * _player.playerModel_Dongeon.ReturnTotalStatus(3), rb.linearVelocity.y);
 
             //플레이어가 땅에 닿았으면 idle로 전환
             if (_player.IsGrounded && jumpFinish)

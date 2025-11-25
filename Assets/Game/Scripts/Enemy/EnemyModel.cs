@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System;
 using UnityEngine;
 
@@ -8,6 +9,8 @@ public class EnemyModel : MonoBehaviour
     public float MaxHp => maxHp;
     [SerializeField] private float curHp;
     public float CurHp => curHp;
+    [SerializeField] private int exp;
+    public int Exp => exp;
 
     public event Action<float> OnHealthChange;
     public EnemyModel(float maxHp)
@@ -30,5 +33,10 @@ public class EnemyModel : MonoBehaviour
     public void Init()
     {
         curHp = maxHp;
+    }
+
+    public void Die()
+    {
+
     }
 }

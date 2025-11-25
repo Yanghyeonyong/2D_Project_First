@@ -31,6 +31,7 @@ public class PlayerModel
     [SerializeField] private int gold = 0;
     public int Gold=>gold;
 
+
     public event Action<float> OnHealthChange;
     public event Action<int> OnPlayerJump;
 
