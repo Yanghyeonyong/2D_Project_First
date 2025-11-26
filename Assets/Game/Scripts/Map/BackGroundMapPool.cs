@@ -11,6 +11,7 @@ public class BackGroundMapPool : MonoBehaviour
     static GameObject curBossStage;
     float usingCheck = 0;
     public bool startCurNormalStage=false;
+
     private void Start()
     {
         if (startCurNormalStage)
@@ -37,9 +38,9 @@ public class BackGroundMapPool : MonoBehaviour
                     Debug.Log("변경 전 : "+ nPrevPos);
                 }
                 int random = Random.Range(0, normalStage.Length);
-                normalStage[random].SetActive(true);
                 curNormalStage = normalStage[random];
                 curNormalStage.transform.position = nPrevPos + new Vector3(0, 60f, 0);
+                normalStage[random].SetActive(true);
                 Debug.Log("변경 후 : " + curNormalStage.transform.position);
             }
             else
@@ -50,10 +51,10 @@ public class BackGroundMapPool : MonoBehaviour
                     curBossStage.SetActive(false);
                 }
                 int random=Random.Range(0, bossStage.Length);
-                bossStage[random].SetActive(true);
-
                 curBossStage = bossStage[random];
                 curBossStage.transform.position = prevPos + new Vector3(0, 60f, 0);
+                bossStage[random].SetActive(true);
+
             }
 
         }

@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4230559757248040707}
   - component: {fileID: 7513729943256374840}
   - component: {fileID: 8907703178797003199}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FirstMob_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ MonoBehaviour:
     attackSpeed: 5
     exp: 3
     gold: 100
-  enemyView: {fileID: 0}
+  enemyView: {fileID: 4230559757248040707}
   layerMask:
     serializedVersion: 2
     m_Bits: 256
@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14299fa9472808545973a51769327480, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyView
-  hpBanner: {fileID: 0}
+  hpBanner: {fileID: 7983895638331235634}
 --- !u!114 &7513729943256374840
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -446,3 +446,14 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8796523578833480337, guid: 235313f5c67dae24991ad3b2f7c0aa0c, type: 3}
   m_PrefabInstance: {fileID: 5928299105065820802}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7983895638331235634 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4362284243400851376, guid: 235313f5c67dae24991ad3b2f7c0aa0c, type: 3}
+  m_PrefabInstance: {fileID: 5928299105065820802}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Image
