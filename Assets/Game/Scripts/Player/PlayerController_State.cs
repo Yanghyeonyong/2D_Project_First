@@ -236,7 +236,7 @@ public class PlayerController_State : MonoBehaviour
         if (ctx.started)
         {
             //OnTakeDamage(31f);
-            LevelUp(testExp);
+            KillMonster(testExp, 100);
         }
     }
 
@@ -275,8 +275,10 @@ public class PlayerController_State : MonoBehaviour
         }
     }
 
-    public void LevelUp(int exp)
+    public void KillMonster(int exp, int gold)
     {
+        playerModel.GetMoney(gold);
+        UpdateInfo();
         int levelUpCount = playerModel_Dongeon.LevelUp(exp);
         if (levelUpCount > 0)
         {

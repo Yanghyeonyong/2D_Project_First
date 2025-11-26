@@ -1,40 +1,32 @@
 using System;
 using Unity.Behavior;
 using Unity.Properties;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UIElements;
 using static UnityEngine.RuleTile.TilingRuleOutput;
 using Action = Unity.Behavior.Action;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "AttackPlayer", story: "[Self] Attack [Player] With [EnemyController]", category: "Action", id: "d52963fc5477954b50a3c18922882081")]
+[NodeDescription(name: "AttackPlayer", story: "[Self] Attack Player With [EnemyController]", category: "Action", id: "d52963fc5477954b50a3c18922882081")]
 public partial class AttackPlayerAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Self;
-    [SerializeReference] public BlackboardVariable<GameObject> Player;
     [SerializeReference] public BlackboardVariable<EnemyController> EnemyController;
+    GameObject player;
 
     protected override Status OnStart()
     {
+        if (player == null)
+        {
+            player = GameObject.FindFirstObjectByType<PlayerController_State>().gameObject;
+            Debug.Log("플레이어 찾기 attack");
+        }
         return Status.Running;
     }
     //Coroutine spawnBullet;
     protected override Status OnUpdate()
     {
-        //if (CheckPlayer())
-        //{
-        //    if (spawnBullet == null)
-        //    {
-        //        spawnBullet = StartCoroutine(SpawnBullet());
-        //    }
-        //}
-        //else
-        //{
-        //    if (spawnBullet != null)
-        //    {
-        //        StopCoroutine(spawnBullet);
-        //    }
-        //    spawnBullet = null;
-        //}
         SpawnBullet();
         return Status.Success;
     }
@@ -47,48 +39,53 @@ public partial class AttackPlayerAction : Action
 
     private bool CheckPlayer()
     {
-        Debug.Log("찾는 중");
-        RaycastHit2D hit = Physics2D.BoxCast(
-            Self.Value.transform.position,
-            new Vector2(1, EnemyController.Value.attackBoxSize),
-            0, Self.Value.transform.right,
-            EnemyController.Value.attackRange, EnemyController.Value.layerMask);
-
-
-        if (hit.collider != null)
+        float distance = Vector2.Distance(Self.Value.transform.position, player.transform.position);
+        if (distance <= EnemyController.Value.enemyModel.AttackRange)
         {
-            Debug.Log("찾았다");
             return true;
         }
         else
-        {
             return false;
-        }
     }
 
-    //IEnumerator SpawnBullet()
-    //{
-    //    while (true)
-    //    {
-
-    //        GameObject mybullet = Instantiate(bullet, transform.position, transform.rotation);
-    //        //mybullet.transform.SetParent(null);
-    //        yield return new WaitForSeconds(1f);
-    //    }
-    //}
 
     float curTime = 0;
     public void SpawnBullet()
     {
-        curTime += Time.deltaTime;
-        if (curTime >= EnemyController.Value.attackDelay)
+        curTime -= Time.deltaTime;
+        if (curTime <= 0)
         {
             if (CheckPlayer())
             {
-                GameObject mybullet = UnityEngine.Object.Instantiate(EnemyController.Value.bullet, EnemyController.Value.transform.position, EnemyController.Value.transform.rotation);
-                curTime = 0;
+                Vector3 dir = player.transform.position - EnemyController.Value.SpawnPos.transform.position + Vector3.up;
+                //Quaternion rot = Quaternion.LookRotation(dir);
+                float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+                // 3. Z축 회전만 적용된 쿼터니언 생성
+                // Z축을 중심으로 angle만큼 회전 (X, Y는 0)
+                Quaternion rot = Quaternion.Euler(0f, 0f, angle);
+                GameObject mybullet = UnityEngine.Object.Instantiate(EnemyController.Value.bullet, EnemyController.Value.SpawnPos.transform.position, rot);
+                mybullet.GetComponent<Bullet>().SetBullet(EnemyController.Value.enemyModel.Damage, EnemyController.Value.enemyModel.BulletSpeed);
+                curTime = EnemyController.Value.enemyModel.AttackSpeed;
             }
         }
+        //curTime += Time.deltaTime;
+        //if (curTime >= EnemyController.Value.enemyModel.AttackSpeed)
+        //{
+        //    if (CheckPlayer())
+        //    {
+        //        Vector3 dir = player.transform.position - EnemyController.Value.SpawnPos.transform.position + Vector3.up;
+        //        //Quaternion rot = Quaternion.LookRotation(dir);
+        //        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+
+        //        // 3. Z축 회전만 적용된 쿼터니언 생성
+        //        // Z축을 중심으로 angle만큼 회전 (X, Y는 0)
+        //        Quaternion rot = Quaternion.Euler(0f, 0f, angle);
+        //        GameObject mybullet = UnityEngine.Object.Instantiate(EnemyController.Value.bullet, EnemyController.Value.SpawnPos.transform.position, rot);
+        //        mybullet.GetComponent<Bullet>().SetBullet(EnemyController.Value.enemyModel.Damage, EnemyController.Value.enemyModel.BulletSpeed);
+        //        curTime = 0;
+        //    }
+        //}
     }
 }
 

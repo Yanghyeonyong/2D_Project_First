@@ -417,7 +417,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6567479833834617677
 Transform:
   m_ObjectHideFlags: 0
@@ -1142,7 +1142,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2193148218244630968
 Transform:
@@ -1217,9 +1217,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cbace677e8989734aae47ffff85e71fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BackGroundMapPool
-  backGroundMap: {fileID: 0}
-  bossStage: []
+  normalStage:
+  - {fileID: 0}
+  - {fileID: 0}
+  bossStage:
+  - {fileID: 2124671754282168172}
+  - {fileID: 0}
   isBossStage: 0
+  startCurNormalStage: 0
 --- !u!1 &8170190831198777804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1780,7 +1785,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8774300268792607599, guid: 277495bdbec4e094992f9763fed2f4ac, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.1
+      value: 2.87
       objectReference: {fileID: 0}
     - target: {fileID: 8868423525809169235, guid: 277495bdbec4e094992f9763fed2f4ac, type: 3}
       propertyPath: m_LocalScale.x

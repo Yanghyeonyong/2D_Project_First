@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.Rendering;
 [System.Serializable]
 public class PlayerModel
 {
@@ -103,5 +104,10 @@ public class PlayerModel
                 jumpForce += statPoint;
                 break;
         }
+    }
+
+    public void GetMoney(int getGold)
+    {
+        gold += getGold;
     }
 }

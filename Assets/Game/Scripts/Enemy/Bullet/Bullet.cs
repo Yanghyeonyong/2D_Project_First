@@ -1,18 +1,25 @@
 using System.Collections;
+using Unity.Hierarchy;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
+    float damage;
+    float bulletSpeed;
+
+    public void SetBullet(float dmg, float spd)
+    { 
+        damage = dmg;
+        bulletSpeed = spd;
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector2.right * Time.deltaTime);
+        if (damage != 0)
+        {
+            transform.Translate(Vector2.right * Time.deltaTime * bulletSpeed);
+        }
     }
 
     Coroutine playerAttakck;
@@ -21,7 +28,7 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.layer==8)
         {
             Debug.Log("´ê¾Ò´Ù.");
-            collision.gameObject.GetComponent<PlayerController_State>().OnTakeDamage(13f);
+            collision.gameObject.GetComponent<PlayerController_State>().OnTakeDamage(damage);
         }
     }
 
