@@ -8,11 +8,12 @@ using static UnityEngine.RuleTile.TilingRuleOutput;
 using Action = Unity.Behavior.Action;
 
 [Serializable, GeneratePropertyBag]
-[NodeDescription(name: "AttackPlayer", story: "[Self] Attack Player With [EnemyController]", category: "Action", id: "d52963fc5477954b50a3c18922882081")]
+[NodeDescription(name: "AttackPlayer", story: "[Self] Attack Player With [EnemyController] and [BulletIndex]", category: "Action", id: "d52963fc5477954b50a3c18922882081")]
 public partial class AttackPlayerAction : Action
 {
     [SerializeReference] public BlackboardVariable<GameObject> Self;
     [SerializeReference] public BlackboardVariable<EnemyController> EnemyController;
+    [SerializeReference] public BlackboardVariable<int> BulletIndex;
     GameObject player;
 
     protected override Status OnStart()
@@ -20,7 +21,7 @@ public partial class AttackPlayerAction : Action
         if (player == null)
         {
             player = GameObject.FindFirstObjectByType<PlayerController_State>().gameObject;
-            Debug.Log("ÇÃ·¹ÀÌ¾î Ã£±â attack");
+            Debug.Log("ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ Ã£ï¿½ï¿½ attack");
         }
         return Status.Running;
     }
@@ -58,34 +59,30 @@ public partial class AttackPlayerAction : Action
             if (CheckPlayer())
             {
                 Vector3 dir = player.transform.position - EnemyController.Value.SpawnPos.transform.position + Vector3.up;
-                //Quaternion rot = Quaternion.LookRotation(dir);
                 float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
-                // 3. ZÃà È¸Àü¸¸ Àû¿ëµÈ ÄõÅÍ´Ï¾ð »ý¼º
-                // ZÃàÀ» Áß½ÉÀ¸·Î angle¸¸Å­ È¸Àü (X, Y´Â 0)
                 Quaternion rot = Quaternion.Euler(0f, 0f, angle);
-                GameObject mybullet = UnityEngine.Object.Instantiate(EnemyController.Value.bullet, EnemyController.Value.SpawnPos.transform.position, rot);
+                //GameObject mybullet = UnityEngine.Object.Instantiate(EnemyController.Value.bullet, EnemyController.Value.SpawnPos.transform.position, rot);
+                //Debug.Log(BulletIndex.Value + "ë²ˆ ê°€ì ¸ì™€");
+                GameObject mybullet = BulletManager.Instance.GetBullet(BulletIndex.Value);
+
+                if (mybullet != null)
+                {
+                    //Debug.Log("ê°€ì ¸ì™€ì„œ ì‚¬ìš© "+mybullet.name);
+                    //mybullet.name = "objpool";
+                    mybullet.transform.rotation = rot;
+                    mybullet.transform.position = EnemyController.Value.SpawnPos.transform.position;
+                    mybullet.SetActive(true);
+                }
+                else
+                {
+                    Debug.Log("ì—†ì–´ì„œ ì‚¬ìš©");
+                    mybullet = UnityEngine.Object.Instantiate(EnemyController.Value.bullet, EnemyController.Value.SpawnPos.transform.position, rot);
+                }
                 mybullet.GetComponent<Bullet>().SetBullet(EnemyController.Value.enemyModel.Damage, EnemyController.Value.enemyModel.BulletSpeed);
                 curTime = EnemyController.Value.enemyModel.AttackSpeed;
             }
         }
-        //curTime += Time.deltaTime;
-        //if (curTime >= EnemyController.Value.enemyModel.AttackSpeed)
-        //{
-        //    if (CheckPlayer())
-        //    {
-        //        Vector3 dir = player.transform.position - EnemyController.Value.SpawnPos.transform.position + Vector3.up;
-        //        //Quaternion rot = Quaternion.LookRotation(dir);
-        //        float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-
-        //        // 3. ZÃà È¸Àü¸¸ Àû¿ëµÈ ÄõÅÍ´Ï¾ð »ý¼º
-        //        // ZÃàÀ» Áß½ÉÀ¸·Î angle¸¸Å­ È¸Àü (X, Y´Â 0)
-        //        Quaternion rot = Quaternion.Euler(0f, 0f, angle);
-        //        GameObject mybullet = UnityEngine.Object.Instantiate(EnemyController.Value.bullet, EnemyController.Value.SpawnPos.transform.position, rot);
-        //        mybullet.GetComponent<Bullet>().SetBullet(EnemyController.Value.enemyModel.Damage, EnemyController.Value.enemyModel.BulletSpeed);
-        //        curTime = 0;
-        //    }
-        //}
     }
 }
 

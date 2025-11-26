@@ -206,6 +206,7 @@ MonoBehaviour:
   - rid: 4403704092411560195
   - rid: 4403704092411560196
   - rid: 4403704092411560197
+  - rid: 4403704098126299263
   m_OriginalGraph: {fileID: 0}
   m_IsInitialised: 0
   m_IsStarted: 0
@@ -246,6 +247,14 @@ MonoBehaviour:
           m_Value1: 16628403705979873568
         Name: Agent
         m_Value: {fileID: 808751292897145654}
+    - rid: 4403704098126299263
+      type: {class: 'BlackboardVariable`1[[System.Int32, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 17586281634373757431
+          m_Value1: 13772454700656336864
+        Name: BulletIndex
+        m_Value: 5
 --- !u!114 &1871076983646281938
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,14 +280,10 @@ MonoBehaviour:
     exp: 30
     gold: 1000
   enemyView: {fileID: 7248465359751428823}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  attackPosY: 1.3
-  attackBoxSize: 6
-  attackRange: 5
   bullet: {fileID: 3379907828377074008, guid: 305012746dffc834698a5f8520a43dc3, type: 3}
   spawnPos: {fileID: 4116731740972960164}
+  isDie: 0
+  dieAnimationTime: 1
 --- !u!114 &7248465359751428823
 MonoBehaviour:
   m_ObjectHideFlags: 0

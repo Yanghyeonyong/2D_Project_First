@@ -6,6 +6,7 @@ public class Bullet : MonoBehaviour
 {
     float damage;
     float bulletSpeed;
+    [SerializeField] int bulletIndex;
 
     public void SetBullet(float dmg, float spd)
     { 
@@ -27,8 +28,12 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.layer==8)
         {
-            Debug.Log("´ê¾Ò´Ù.");
             collision.gameObject.GetComponent<PlayerController_State>().OnTakeDamage(damage);
+            BulletManager.Instance.SetBullet(gameObject, bulletIndex);
+        }
+        if (collision.gameObject.layer == 7 || collision.gameObject.layer == 9)
+        {
+            BulletManager.Instance.SetBullet(gameObject, bulletIndex);
         }
     }
 
