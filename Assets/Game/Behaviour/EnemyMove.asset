@@ -25,7 +25,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c02bb70996b49eba31d0c206e28da24, type: 3}
   m_Name: EnemyMove Blackboard
   m_EditorClassIdentifier: Unity.Behavior::Unity.Behavior.RuntimeBlackboardAsset
-  VersionTimestamp: 638997898690623299
+  VersionTimestamp: 638997931488266200
   AssetID:
     m_Value0: 1481227351518104582
     m_Value1: 8077468563779189704
@@ -102,7 +102,7 @@ MonoBehaviour:
   - rid: 4403703930657177798
   - rid: 4403703930657177849
   - rid: 4403704071992377559
-  m_VersionTimestamp: 638997920624576510
+  m_VersionTimestamp: 638997931500083469
   m_SerializedVersion: 1
   m_DebugInfo: {fileID: -519475169596233792}
   m_RuntimeGraph: {fileID: 3858629994904293309}
@@ -125,7 +125,7 @@ MonoBehaviour:
     NamedChildren: []
     IsPlaceholder: 0
   - Name: DetectPlayer
-    Story: '[Self] Detect Player with [EnemyController]'
+    Story: '[Self] Detect Player with [EnemyController] And [NavMeshAgent]'
     RuntimeTypeString: DetectPlayerAction, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
       PublicKeyToken=null
     RuntimeTypeID:
@@ -141,6 +141,11 @@ MonoBehaviour:
       Type:
         m_SerializableType: EnemyController, Assembly-CSharp, Version=0.0.0.0, Culture=neutral,
           PublicKeyToken=null
+      Tooltip: 
+    - Name: NavMeshAgent
+      Type:
+        m_SerializableType: UnityEngine.AI.NavMeshAgent, UnityEngine.AIModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
       Tooltip: 
     NamedChildren: []
     IsPlaceholder: 0
@@ -295,6 +300,7 @@ MonoBehaviour:
         m_FieldValues:
         - rid: 4403703930657177699
         - rid: 4403704092411560045
+        - rid: 4403704098126299270
     - rid: 4403703930657177697
       type: {class: PortModel, ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
       data:
@@ -803,6 +809,35 @@ MonoBehaviour:
         IsExposed: 1
         m_IsShared: 0
         m_Value: 0
+    - rid: 4403704098126299270
+      type: {class: BehaviorGraphNodeModel/FieldModel, ns: Unity.Behavior, asm: Unity.Behavior.Authoring}
+      data:
+        FieldName: NavMeshAgent
+        Type:
+          m_SerializableType: UnityEngine.AI.NavMeshAgent, UnityEngine.AIModule,
+            Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        LocalValue:
+          rid: 4403704098126299271
+        LinkedVariable:
+          rid: 4403704098126299272
+    - rid: 4403704098126299271
+      type: {class: 'BlackboardVariable`1[[UnityEngine.AI.NavMeshAgent, UnityEngine.AIModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        GUID:
+          m_Value0: 0
+          m_Value1: 0
+        Name: 
+        m_Value: {fileID: 0}
+    - rid: 4403704098126299272
+      type: {class: 'TypedVariableModel`1[[UnityEngine.AI.NavMeshAgent, UnityEngine.AIModule]]', ns: Unity.Behavior.GraphFramework, asm: Unity.Behavior.GraphFramework}
+      data:
+        ID:
+          m_Value0: 8995915706033992329
+          m_Value1: 16628403705979873568
+        Name: Agent
+        IsExposed: 1
+        m_IsShared: 0
+        m_Value: {fileID: 0}
 --- !u!114 &3858629994904293309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -835,14 +870,14 @@ MonoBehaviour:
           rid: 4403703930657177604
         BlackboardGroupReferences: []
         Root:
-          rid: 4403704098126299250
+          rid: 4403704098126299273
         m_ActiveNodes: []
         m_NodesToTick: []
         m_NodesToEnd:
           rid: 4403703930657177606
         m_EndedNodes:
           rid: 4403703930657177607
-        m_VersionTimestamp: 638997920624576510
+        m_VersionTimestamp: 638997931500083469
     - rid: 4403703930657177604
       type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -859,12 +894,12 @@ MonoBehaviour:
       type: {class: Blackboard, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         m_Variables:
-        - rid: 4403704098126299252
-        - rid: 4403704098126299253
-        - rid: 4403704098126299254
-        - rid: 4403704098126299255
-        - rid: 4403704098126299256
-    - rid: 4403704098126299250
+        - rid: 4403704098126299275
+        - rid: 4403704098126299276
+        - rid: 4403704098126299277
+        - rid: 4403704098126299278
+        - rid: 4403704098126299279
+    - rid: 4403704098126299273
       type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
@@ -875,10 +910,10 @@ MonoBehaviour:
         m_Parent:
           rid: -2
         m_Child:
-          rid: 4403704098126299251
+          rid: 4403704098126299274
         Repeat: 1
         AllowMultipleRepeatsPerTick: 0
-    - rid: 4403704098126299251
+    - rid: 4403704098126299274
       type: {class: SelectorComposite, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
@@ -887,11 +922,11 @@ MonoBehaviour:
         Graph:
           rid: 4403703930657177603
         m_Parent:
-          rid: 4403704098126299250
+          rid: 4403704098126299273
         m_Children:
-        - rid: 4403704098126299257
-        - rid: 4403704098126299258
-    - rid: 4403704098126299252
+        - rid: 4403704098126299280
+        - rid: 4403704098126299281
+    - rid: 4403704098126299275
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -899,7 +934,7 @@ MonoBehaviour:
           m_Value1: 0
         Name: Self
         m_Value: {fileID: 0}
-    - rid: 4403704098126299253
+    - rid: 4403704098126299276
       type: {class: 'BlackboardVariable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject, UnityEngine.CoreModule]], mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -907,7 +942,7 @@ MonoBehaviour:
           m_Value1: 14173819362762350817
         Name: WayPoints
         m_Value: []
-    - rid: 4403704098126299254
+    - rid: 4403704098126299277
       type: {class: 'BlackboardVariable`1[[EnemyController, Assembly-CSharp]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -915,7 +950,7 @@ MonoBehaviour:
           m_Value1: 15579170306890997822
         Name: EnemyConroller
         m_Value: {fileID: 0}
-    - rid: 4403704098126299255
+    - rid: 4403704098126299278
       type: {class: 'BlackboardVariable`1[[UnityEngine.AI.NavMeshAgent, UnityEngine.AIModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -923,7 +958,7 @@ MonoBehaviour:
           m_Value1: 16628403705979873568
         Name: Agent
         m_Value: {fileID: 0}
-    - rid: 4403704098126299256
+    - rid: 4403704098126299279
       type: {class: 'BlackboardVariable`1[[System.Int32, mscorlib]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         GUID:
@@ -931,7 +966,7 @@ MonoBehaviour:
           m_Value1: 13772454700656336864
         Name: BulletIndex
         m_Value: 0
-    - rid: 4403704098126299257
+    - rid: 4403704098126299280
       type: {class: SequenceComposite, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
@@ -940,12 +975,12 @@ MonoBehaviour:
         Graph:
           rid: 4403703930657177603
         m_Parent:
-          rid: 4403704098126299251
+          rid: 4403704098126299274
         m_Children:
-        - rid: 4403704098126299259
-        - rid: 4403704098126299260
-        - rid: 4403704098126299261
-    - rid: 4403704098126299258
+        - rid: 4403704098126299282
+        - rid: 4403704098126299283
+        - rid: 4403704098126299284
+    - rid: 4403704098126299281
       type: {class: PatrolAction, ns: , asm: Assembly-CSharp}
       data:
         ID:
@@ -954,14 +989,14 @@ MonoBehaviour:
         Graph:
           rid: 4403703930657177603
         m_Parent:
-          rid: 4403704098126299251
+          rid: 4403704098126299274
         Self:
-          rid: 4403704098126299252
+          rid: 4403704098126299275
         WayPoint:
-          rid: 4403704098126299253
+          rid: 4403704098126299276
         EnemyController:
-          rid: 4403704098126299254
-    - rid: 4403704098126299259
+          rid: 4403704098126299277
+    - rid: 4403704098126299282
       type: {class: DetectPlayerAction, ns: , asm: Assembly-CSharp}
       data:
         ID:
@@ -970,12 +1005,14 @@ MonoBehaviour:
         Graph:
           rid: 4403703930657177603
         m_Parent:
-          rid: 4403704098126299257
+          rid: 4403704098126299280
         Self:
-          rid: 4403704098126299252
+          rid: 4403704098126299275
         EnemyController:
-          rid: 4403704098126299254
-    - rid: 4403704098126299260
+          rid: 4403704098126299277
+        NavMeshAgent:
+          rid: 4403704098126299278
+    - rid: 4403704098126299283
       type: {class: ChasePlayerAction, ns: , asm: Assembly-CSharp}
       data:
         ID:
@@ -984,12 +1021,12 @@ MonoBehaviour:
         Graph:
           rid: 4403703930657177603
         m_Parent:
-          rid: 4403704098126299257
+          rid: 4403704098126299280
         Self:
-          rid: 4403704098126299252
+          rid: 4403704098126299275
         NavMeshAgent:
-          rid: 4403704098126299255
-    - rid: 4403704098126299261
+          rid: 4403704098126299278
+    - rid: 4403704098126299284
       type: {class: AttackPlayerAction, ns: , asm: Assembly-CSharp}
       data:
         ID:
@@ -998,13 +1035,13 @@ MonoBehaviour:
         Graph:
           rid: 4403703930657177603
         m_Parent:
-          rid: 4403704098126299257
+          rid: 4403704098126299280
         Self:
-          rid: 4403704098126299252
+          rid: 4403704098126299275
         EnemyController:
-          rid: 4403704098126299254
+          rid: 4403704098126299277
         BulletIndex:
-          rid: 4403704098126299256
+          rid: 4403704098126299279
 --- !u!114 &4147430347103609215
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1026,7 +1063,7 @@ MonoBehaviour:
   - rid: 4403704071992377594
   - rid: 4403704078883618896
   - rid: 4403704098126299222
-  m_VersionTimestamp: 638997898690623299
+  m_VersionTimestamp: 638997931488266200
   m_CommandBuffer:
     m_Commands: []
   m_RuntimeBlackboardAsset: {fileID: -474452675504499297}
