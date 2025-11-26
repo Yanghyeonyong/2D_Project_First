@@ -67,6 +67,16 @@ public class PlayerModel
         OnHealthChange?.Invoke(curHp);
     }
 
+    public void UsingSkill(float usingMp)
+    {
+        curMp -= usingMp;
+    }
+
+    public void HealingMp()
+    {
+        curMp = Mathf.Min(MaxMp, curMp + MaxMp / 5);
+    }
+
     public bool BuyStatus(int usingGold)
     {
         if (usingGold > gold)

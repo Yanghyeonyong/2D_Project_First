@@ -88,6 +88,17 @@ public class PlayerController_State : MonoBehaviour
 
     public bool onTest=false;
 
+    [SerializeField] Transform pos;
+    public Transform Pos => pos;
+
+    [SerializeField] int bulletIndex;
+    public int BulletIndex => bulletIndex;
+
+    [SerializeField] GameObject skill;
+    public GameObject Skill => skill;
+    [SerializeField] float usingSkillMp;
+    public float UsingSkillMp => usingSkillMp;
+
     private void Start()
     {
         //저장된 데이터 가져옴
@@ -187,6 +198,16 @@ public class PlayerController_State : MonoBehaviour
         }
     }
 
+    public void OnSkill(InputAction.CallbackContext ctx)
+    {
+        if (ctx.performed && !isCrouch)
+        {
+            Debug.Log("스킬 발동 시도");
+            SetState(new SkillState(this));
+            playerView.UpdatePlayerMP(playerModel.CurMp / playerModel.MaxMp);
+        }
+    }
+
     //플레이어가 레이 범위에 있는지 체크
     public LayerMask layerMask;
 
@@ -277,6 +298,8 @@ public class PlayerController_State : MonoBehaviour
 
     public void KillMonster(int exp, int gold)
     {
+        playerModel.HealingMp();
+        playerView.UpdatePlayerMP(playerModel.CurMp / playerModel.MaxMp);
         playerModel.GetMoney(gold);
         UpdateInfo();
         int levelUpCount = playerModel_Dongeon.LevelUp(exp);

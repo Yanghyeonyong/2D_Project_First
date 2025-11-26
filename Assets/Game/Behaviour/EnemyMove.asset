@@ -102,7 +102,7 @@ MonoBehaviour:
   - rid: 4403703930657177798
   - rid: 4403703930657177849
   - rid: 4403704071992377559
-  m_VersionTimestamp: 638997931500083469
+  m_VersionTimestamp: 638997947907765844
   m_SerializedVersion: 1
   m_DebugInfo: {fileID: -519475169596233792}
   m_RuntimeGraph: {fileID: 3858629994904293309}
@@ -870,14 +870,14 @@ MonoBehaviour:
           rid: 4403703930657177604
         BlackboardGroupReferences: []
         Root:
-          rid: 4403704098126299273
+          rid: 4403704100518101070
         m_ActiveNodes: []
         m_NodesToTick: []
         m_NodesToEnd:
           rid: 4403703930657177606
         m_EndedNodes:
           rid: 4403703930657177607
-        m_VersionTimestamp: 638997931500083469
+        m_VersionTimestamp: 638997947907765844
     - rid: 4403703930657177604
       type: {class: BlackboardReference, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -899,33 +899,6 @@ MonoBehaviour:
         - rid: 4403704098126299277
         - rid: 4403704098126299278
         - rid: 4403704098126299279
-    - rid: 4403704098126299273
-      type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        ID:
-          m_Value0: 17436342475297203343
-          m_Value1: 1794667875559247115
-        Graph:
-          rid: 4403703930657177603
-        m_Parent:
-          rid: -2
-        m_Child:
-          rid: 4403704098126299274
-        Repeat: 1
-        AllowMultipleRepeatsPerTick: 0
-    - rid: 4403704098126299274
-      type: {class: SelectorComposite, ns: Unity.Behavior, asm: Unity.Behavior}
-      data:
-        ID:
-          m_Value0: 1253510111025038598
-          m_Value1: 16385941986775479816
-        Graph:
-          rid: 4403703930657177603
-        m_Parent:
-          rid: 4403704098126299273
-        m_Children:
-        - rid: 4403704098126299280
-        - rid: 4403704098126299281
     - rid: 4403704098126299275
       type: {class: 'BlackboardVariable`1[[UnityEngine.GameObject, UnityEngine.CoreModule]]', ns: Unity.Behavior, asm: Unity.Behavior}
       data:
@@ -966,7 +939,34 @@ MonoBehaviour:
           m_Value1: 13772454700656336864
         Name: BulletIndex
         m_Value: 0
-    - rid: 4403704098126299280
+    - rid: 4403704100518101070
+      type: {class: Start, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        ID:
+          m_Value0: 17436342475297203343
+          m_Value1: 1794667875559247115
+        Graph:
+          rid: 4403703930657177603
+        m_Parent:
+          rid: -2
+        m_Child:
+          rid: 4403704100518101071
+        Repeat: 1
+        AllowMultipleRepeatsPerTick: 0
+    - rid: 4403704100518101071
+      type: {class: SelectorComposite, ns: Unity.Behavior, asm: Unity.Behavior}
+      data:
+        ID:
+          m_Value0: 1253510111025038598
+          m_Value1: 16385941986775479816
+        Graph:
+          rid: 4403703930657177603
+        m_Parent:
+          rid: 4403704100518101070
+        m_Children:
+        - rid: 4403704100518101072
+        - rid: 4403704100518101073
+    - rid: 4403704100518101072
       type: {class: SequenceComposite, ns: Unity.Behavior, asm: Unity.Behavior}
       data:
         ID:
@@ -975,12 +975,12 @@ MonoBehaviour:
         Graph:
           rid: 4403703930657177603
         m_Parent:
-          rid: 4403704098126299274
+          rid: 4403704100518101071
         m_Children:
-        - rid: 4403704098126299282
-        - rid: 4403704098126299283
-        - rid: 4403704098126299284
-    - rid: 4403704098126299281
+        - rid: 4403704100518101074
+        - rid: 4403704100518101075
+        - rid: 4403704100518101076
+    - rid: 4403704100518101073
       type: {class: PatrolAction, ns: , asm: Assembly-CSharp}
       data:
         ID:
@@ -989,14 +989,14 @@ MonoBehaviour:
         Graph:
           rid: 4403703930657177603
         m_Parent:
-          rid: 4403704098126299274
+          rid: 4403704100518101071
         Self:
           rid: 4403704098126299275
         WayPoint:
           rid: 4403704098126299276
         EnemyController:
           rid: 4403704098126299277
-    - rid: 4403704098126299282
+    - rid: 4403704100518101074
       type: {class: DetectPlayerAction, ns: , asm: Assembly-CSharp}
       data:
         ID:
@@ -1005,14 +1005,14 @@ MonoBehaviour:
         Graph:
           rid: 4403703930657177603
         m_Parent:
-          rid: 4403704098126299280
+          rid: 4403704100518101072
         Self:
           rid: 4403704098126299275
         EnemyController:
           rid: 4403704098126299277
         NavMeshAgent:
           rid: 4403704098126299278
-    - rid: 4403704098126299283
+    - rid: 4403704100518101075
       type: {class: ChasePlayerAction, ns: , asm: Assembly-CSharp}
       data:
         ID:
@@ -1021,12 +1021,12 @@ MonoBehaviour:
         Graph:
           rid: 4403703930657177603
         m_Parent:
-          rid: 4403704098126299280
+          rid: 4403704100518101072
         Self:
           rid: 4403704098126299275
         NavMeshAgent:
           rid: 4403704098126299278
-    - rid: 4403704098126299284
+    - rid: 4403704100518101076
       type: {class: AttackPlayerAction, ns: , asm: Assembly-CSharp}
       data:
         ID:
@@ -1035,7 +1035,7 @@ MonoBehaviour:
         Graph:
           rid: 4403703930657177603
         m_Parent:
-          rid: 4403704098126299280
+          rid: 4403704100518101072
         Self:
           rid: 4403704098126299275
         EnemyController:

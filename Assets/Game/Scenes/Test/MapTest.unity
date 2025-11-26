@@ -274,8 +274,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 857989424879452815, guid: aef0a5976cfdd764c8bf90183493a398, type: 3}
+      propertyPath: pos
+      value: 
+      objectReference: {fileID: 776503843}
+    - target: {fileID: 857989424879452815, guid: aef0a5976cfdd764c8bf90183493a398, type: 3}
+      propertyPath: skill
+      value: 
+      objectReference: {fileID: 4777081729256371218, guid: 8c6d1baccb7cab04e837acab7a1cbc20, type: 3}
+    - target: {fileID: 857989424879452815, guid: aef0a5976cfdd764c8bf90183493a398, type: 3}
       propertyPath: onTest
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 857989424879452815, guid: aef0a5976cfdd764c8bf90183493a398, type: 3}
+      propertyPath: bulletIndex
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 857989424879452815, guid: aef0a5976cfdd764c8bf90183493a398, type: 3}
+      propertyPath: usingSkillMp
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 857989424879452815, guid: aef0a5976cfdd764c8bf90183493a398, type: 3}
       propertyPath: superJumpDelay
@@ -325,6 +341,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1932360313543776288, guid: aef0a5976cfdd764c8bf90183493a398, type: 3}
+      propertyPath: m_ActionEvents.Array.size
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932360313543776288, guid: aef0a5976cfdd764c8bf90183493a398, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_ActionId
+      value: 1d592f68-4d49-477a-adec-bc2e7fd2d7c1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932360313543776288, guid: aef0a5976cfdd764c8bf90183493a398, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_ActionName
+      value: 'Player/Skill[/Mouse/rightButton]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932360313543776288, guid: aef0a5976cfdd764c8bf90183493a398, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932360313543776288, guid: aef0a5976cfdd764c8bf90183493a398, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932360313543776288, guid: aef0a5976cfdd764c8bf90183493a398, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 137930079}
+    - target: {fileID: 1932360313543776288, guid: aef0a5976cfdd764c8bf90183493a398, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932360313543776288, guid: aef0a5976cfdd764c8bf90183493a398, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnSkill
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932360313543776288, guid: aef0a5976cfdd764c8bf90183493a398, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: PlayerController_State, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1932360313543776288, guid: aef0a5976cfdd764c8bf90183493a398, type: 3}
+      propertyPath: m_ActionEvents.Array.data[12].m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
     - target: {fileID: 2631451431042319544, guid: aef0a5976cfdd764c8bf90183493a398, type: 3}
       propertyPath: m_Name
       value: Player(Test)
@@ -342,6 +398,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aef0a5976cfdd764c8bf90183493a398, type: 3}
+--- !u!114 &137930079 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 857989424879452815, guid: aef0a5976cfdd764c8bf90183493a398, type: 3}
+  m_PrefabInstance: {fileID: 137930078}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1323d58dc7ba7d249968bfb17314cd8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController_State
 --- !u!1001 &162638162
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -433,7 +500,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6560690660396722053, guid: d71448fdfd6754844a7838aec445227b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6809646284333630986, guid: d71448fdfd6754844a7838aec445227b, type: 3}
       propertyPath: m_StoppingDistance
@@ -3157,7 +3224,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1798784419480105457, guid: 43f16b269b7faca4398610040c5dc5e7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2616138597234986516, guid: 43f16b269b7faca4398610040c5dc5e7, type: 3}
       propertyPath: 'managedReferences[4403704092411560193].m_Value.Array.data[0]'
@@ -3640,7 +3707,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 618029599422932671, guid: 549a832c6a0fd6a44add6847c47a5084, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 714767206796798944, guid: 549a832c6a0fd6a44add6847c47a5084, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3869,7 +3936,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6206458983493763922, guid: b687636bf3c32e14aa81eb2604306ee1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6585225695419827616, guid: b687636bf3c32e14aa81eb2604306ee1, type: 3}
       propertyPath: m_Layer

@@ -26,9 +26,14 @@ public class Bullet : MonoBehaviour
     Coroutine playerAttakck;
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.layer==8)
+        if (collision.gameObject.layer == 8 && bulletIndex != 6)
         {
             collision.gameObject.GetComponent<PlayerController_State>().OnTakeDamage(damage);
+            BulletManager.Instance.SetBullet(gameObject, bulletIndex);
+        }
+        else if (collision.gameObject.layer == 6 && bulletIndex == 6)
+        {
+            collision.gameObject.GetComponent<EnemyController>().OnTakeDamage(damage);
             BulletManager.Instance.SetBullet(gameObject, bulletIndex);
         }
         if (collision.gameObject.layer == 7 || collision.gameObject.layer == 9)
