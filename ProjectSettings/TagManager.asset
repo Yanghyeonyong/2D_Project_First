@@ -35,10 +35,10 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
+  - firstFloor
+  - BackGround
+  - BossStage
+  - CheckNavMesh
   - 
   - 
   m_SortingLayers:

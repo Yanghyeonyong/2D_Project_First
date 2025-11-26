@@ -31,51 +31,51 @@ public class EnemyController : MonoBehaviour
     }
 
     public LayerMask layerMask;
-    float attackPosY = 1.3f;
-    float attackBoxSize = 6f;
-    float attackRange = 5f;
+    public float attackPosY = 1.3f;
+    public float attackBoxSize = 6f;
+    public float attackRange = 5f;
 
     //플레이어가 레이 범위에 있는지 체크
-    private bool CheckPlayer()
-    {
-        Debug.Log("찾는 중");
-        RaycastHit2D hit = Physics2D.BoxCast(
-            transform.position,
-            new Vector2(1, attackBoxSize),
-            0, transform.right,
-            attackRange, layerMask);
+    //private bool CheckPlayer()
+    //{
+    //    Debug.Log("찾는 중");
+    //    RaycastHit2D hit = Physics2D.BoxCast(
+    //        transform.position,
+    //        new Vector2(1, attackBoxSize),
+    //        0, transform.right,
+    //        attackRange, layerMask);
 
 
-        if (hit.collider != null)
-        {
-            Debug.Log("찾았다");
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
+    //    if (hit.collider != null)
+    //    {
+    //        Debug.Log("찾았다");
+    //        return true;
+    //    }
+    //    else
+    //    {
+    //        return false;
+    //    }
+    //}
     public GameObject bullet;
     private void Update()
     {
-        if (CheckPlayer())
-        {
-            if (spawnBullet == null)
-            {
-                spawnBullet=StartCoroutine(SpawnBullet());
-            }
-        }
-        else
-        {
-            if (spawnBullet != null)
-            {
-                StopCoroutine(spawnBullet);
-            }
-                spawnBullet = null;
-        }
+        //if (CheckPlayer())
+        //{
+        //    if (spawnBullet == null)
+        //    {
+        //        spawnBullet=StartCoroutine(SpawnBullet());
+        //    }
+        //}
+        //else
+        //{
+        //    if (spawnBullet != null)
+        //    {
+        //        StopCoroutine(spawnBullet);
+        //    }
+        //        spawnBullet = null;
+        //}
     }
-
+    public float attackDelay;
     Coroutine spawnBullet;
     IEnumerator SpawnBullet()
     {
