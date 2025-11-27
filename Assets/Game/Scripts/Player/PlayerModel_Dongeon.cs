@@ -38,11 +38,11 @@ public class PlayerModel_Dongeon
         maxExp = 50;
     }
 
-    public void TakeDamage(float takeDamage)
+    public bool TakeDamage(float takeDamage)
     {
         //방어력으로 인한 피격 데미지 감소(1차)
         takeDamage = Mathf.Max(0, takeDamage - defence);
-        playerModel.TakeDamage(takeDamage);
+        return playerModel.TakeDamage(takeDamage);
     }
 
     public void ChangeStatus(int statType, float statPoint)

@@ -6,11 +6,13 @@ public class SceneChanger : MonoBehaviour
     int sceneNum;
     public void NextScene()
     {
-        StartCoroutine(GameManager.Instance.MoveScene(1)); 
+        //StartCoroutine(GameManager.Instance.MoveScene(1));
+        GameManager.Instance.StartCoroutine(GameManager.Instance.MoveScene(1));
     }
     public void PrevScene()
     {
-        StartCoroutine(GameManager.Instance.MoveScene(-1));
+        //StartCoroutine(GameManager.Instance.MoveScene(-1));
+        GameManager.Instance.StartCoroutine(GameManager.Instance.MoveScene(-1));
     }
     public void TitleScene()
     {
@@ -18,7 +20,8 @@ public class SceneChanger : MonoBehaviour
     }
     public void VillageScene()
     {
-        StartCoroutine(GameManager.Instance.MoveScene(0,1));
+        //StartCoroutine(GameManager.Instance.MoveScene(0,1));
+        GameManager.Instance.StartCoroutine(GameManager.Instance.MoveScene(0, 1));
     }
 
     public void GameExit()

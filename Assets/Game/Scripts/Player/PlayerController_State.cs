@@ -2,6 +2,7 @@ using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController_State : MonoBehaviour
 {
@@ -128,9 +129,17 @@ public class PlayerController_State : MonoBehaviour
 
         originColor = spriteRenderer.color;
 
+        playerModel.Init();
+
         playerView.UpdatePlayerHP(playerModel.CurHp / playerModel.MaxHp);
+        playerView.UpdatePlayerMP(playerModel.CurMp / playerModel.MaxMp);
+        UpdateInfo();
 
         SetState(new IdleState(this));
+
+        GameManager.Instance.IsInvincible = false;
+
+        Debug.Log("현재 체력 : "+ playerModel.CurHp);
     }
 
     private void Update()
@@ -287,14 +296,16 @@ public class PlayerController_State : MonoBehaviour
 
 
     private Coroutine damgageCoroutine;
+    [SerializeField] float dieAnimationTime = 2f;
     public void OnTakeDamage(float takeDamage)
     {
+        bool isDie =false;
         if (!GameManager.Instance.IsInvincible)
         {
-            Debug.Log("데미지를 받았다");
+            Debug.Log("현재 " + takeDamage + " 데미지를 받았다");
             if (GameManager.Instance.curStage == 2)
             {
-                playerModel_Dongeon.TakeDamage(takeDamage);
+                isDie = playerModel_Dongeon.TakeDamage(takeDamage);
             }
             else
             {
@@ -311,8 +322,17 @@ public class PlayerController_State : MonoBehaviour
             }
             UpdateInfo();
             playerView.UpdatePlayerHP(playerModel.CurHp / playerModel.MaxHp);
+
+            if (!isDie)
+            {
+                rb.linearVelocity = Vector2.zero;
+                Debug.Log("현재 체력 : " + playerModel.CurHp);
+                StartCoroutine(playerView.DieAnimation(dieAnimationTime));
+
+            }
         }
     }
+
     IEnumerator TakeDamageCharacter()
     {
         for (int i = 0; i < 2; i++)
@@ -323,6 +343,27 @@ public class PlayerController_State : MonoBehaviour
             yield return changeTime;
         }
     }
+
+
+    //[SerializeField] GameObject[] dieObject;
+    //[SerializeField] Image fadeImage;
+    //IEnumerator DieAnimation()
+    //{
+    //    foreach (GameObject obj in dieObject)
+    //    {
+    //        obj.SetActive(true);
+    //    }
+        
+    //    GameManager.Instance.IsInvincible = true;
+    //    float timer = 0f;
+    //    while (timer <= dieAnimationTime)
+    //    {
+    //        fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g,
+    //        fadeImage.color.b, Mathf.Min(255, fadeImage.color.a + 1 / dieAnimationTime / 10));
+    //        yield return new WaitForSeconds(0.1f);
+    //        timer += 0.1f;
+    //    }
+    //}
 
     public void KillMonster(int exp, int gold)
     {

@@ -21,6 +21,8 @@ public partial class DetectPlayerAction : Action
         {
             player = GameObject.FindFirstObjectByType<PlayerController_State>().gameObject;
         }
+        if (player == null)
+            return Status.Failure;
         return Status.Running;
     }
 

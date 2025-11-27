@@ -61,6 +61,34 @@ public class PlayerView : MonoBehaviour
         }
         yield return new WaitUntil(() => !levelUpPage.activeSelf);
         GameManager.Instance.IsInvincible = false;
-        Debug.Log("무적 종료");
     }
+
+
+
+    [SerializeField] GameObject[] dieObject;
+    [SerializeField] Image fadeImage;
+    [SerializeField] TextMeshProUGUI fadeText;
+    public IEnumerator DieAnimation(float dieAnimationTime)
+    {
+        foreach (GameObject obj in dieObject)
+        {
+            obj.SetActive(true);
+        }
+
+        GameManager.Instance.IsInvincible = true;
+        float timer = 0f;
+        while (timer <= dieAnimationTime)
+        {
+            fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g,
+            fadeImage.color.b, Mathf.Min(255, fadeImage.color.a + 1 / dieAnimationTime / 10));
+
+            fadeText.color = new Color(fadeText.color.r, fadeText.color.g,
+fadeText.color.b, Mathf.Min(255, fadeText.color.a + 1 / dieAnimationTime / 10));
+            yield return new WaitForSeconds(0.1f);
+            timer += 0.1f;
+        }
+        //StartCoroutine(GameManager.Instance.MoveScene(0, 1));
+        GameManager.Instance.StartCoroutine(GameManager.Instance.MoveScene(0, 1));
+    }
+
 }
