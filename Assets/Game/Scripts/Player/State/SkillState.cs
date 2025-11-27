@@ -46,7 +46,7 @@ public class SkillState : IPlayerState
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         Debug.Log("스킬 발동 시도 3");
         mousePosition = new Vector3(mousePosition.x, mousePosition.y, 0f);
-        Vector3 playerPosition = _player.Pos.position + Vector3.up;
+        Vector3 playerPosition = _player.Pos.position + new Vector3(0, 1.5f,0);
 
         Vector3 dir = mousePosition - playerPosition;
            
@@ -69,7 +69,7 @@ public class SkillState : IPlayerState
             Debug.Log("없어서 사용");
             mybullet = UnityEngine.Object.Instantiate(_player.Skill, playerPosition, rot);
         }
-        mybullet.GetComponent<Bullet>().SetBullet(_player.playerModel_Dongeon.ReturnTotalStatus(2)*1.5f, _player.playerModel_Dongeon.ReturnTotalStatus(3));
+        mybullet.GetComponent<Bullet>().SetBullet(_player.playerModel_Dongeon.ReturnTotalStatus(1)*1.5f, _player.playerModel_Dongeon.ReturnTotalStatus(3));
 
     }
 

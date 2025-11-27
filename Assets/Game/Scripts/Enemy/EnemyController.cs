@@ -71,4 +71,9 @@ public class EnemyController : MonoBehaviour
         }
         gameObject.SetActive(false);
     }
+
+    public void EnemyUpgrade(float upgradeRate)
+    {
+        enemyModel.EnemyUpgrade(upgradeRate);
+    }
 }

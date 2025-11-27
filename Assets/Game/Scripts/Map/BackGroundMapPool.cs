@@ -12,6 +12,10 @@ public class BackGroundMapPool : MonoBehaviour
     float usingCheck = 0;
     public bool startCurNormalStage=false;
 
+    [SerializeField] EnemyController[] enemies;
+    [SerializeField] float upgradeRate;
+    bool isFirst = true;
+
     private void Start()
     {
         if (startCurNormalStage)
@@ -29,22 +33,35 @@ public class BackGroundMapPool : MonoBehaviour
             usingCheck = transform.position.y;
             if (!isBossStage)
             {
-                //backGroundMap.transform.position += new Vector3(0, 60f, 0);
+
+                foreach (var enemy in enemies)
+                {
+                    enemy.EnemyUpgrade(upgradeRate);
+                }
                 if (curNormalStage != null)
                 {
-                    Debug.Log("변경 전전 : " + nPrevPos);
                     nPrevPos = curNormalStage.transform.position;
                     curNormalStage.SetActive(false);
-                    Debug.Log("변경 전 : "+ nPrevPos);
                 }
                 int random = Random.Range(0, normalStage.Length);
                 curNormalStage = normalStage[random];
                 curNormalStage.transform.position = nPrevPos + new Vector3(0, 60f, 0);
                 normalStage[random].SetActive(true);
-                Debug.Log("변경 후 : " + curNormalStage.transform.position);
+
             }
             else
             {
+                if (isFirst)
+                {
+                    isFirst = false;
+                }
+                else
+                {
+                    foreach (var enemy in enemies)
+                    {
+                        enemy.EnemyUpgrade(upgradeRate);
+                    }
+                }
                 if (curBossStage != null)
                 {
                     prevPos = curBossStage.transform.position;
@@ -54,6 +71,8 @@ public class BackGroundMapPool : MonoBehaviour
                 curBossStage = bossStage[random];
                 curBossStage.transform.position = prevPos + new Vector3(0, 60f, 0);
                 bossStage[random].SetActive(true);
+
+
 
             }
 

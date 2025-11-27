@@ -19,7 +19,7 @@ public partial class DetectPlayerAction : Action
     {
         if (player == null)
         {
-            player = GameObject.FindFirstObjectByType<PlayerController_State>().gameObject;
+            player = GameObject.FindFirstObjectByType<PlayerController_State>()?.gameObject;
         }
         if (player == null)
             return Status.Failure;

@@ -87,4 +87,14 @@ public class EnemyModel
     {
         curHp = maxHp;
     }
+
+    public void EnemyUpgrade(float upgradeRate)
+    {
+        maxHp += maxHp * upgradeRate;
+        curHp += maxHp;
+        damage += damage * upgradeRate;
+        defence += defence * upgradeRate;
+        exp += Mathf.Max(1, (int) (exp * upgradeRate));
+        gold += (int)(gold * upgradeRate);
+    }
 }
