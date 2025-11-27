@@ -29,7 +29,7 @@ public class PlayerData_JSON : MonoBehaviour
             Debug.Log(filePath);
             //파일에서 문자열을 읽어옴
             string json = File.ReadAllText(filePath);
-
+            Debug.Log("데이터 정보 : "+ json);
             //문자열을 다시 객체의 형태로 변환
             PlayerModel player = JsonUtility.FromJson<PlayerModel>(json);
             return player;

@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerData
   hp: 100
   mp: 100
-  defence: 20
-  damage: 35
-  attackRange: 18
-  moveSpeed: 7
-  jumpForce: 12.5
-  gold: 813
+  defence: 0
+  damage: 5
+  attackRange: 3
+  moveSpeed: 10
+  jumpForce: 10
+  gold: 1500

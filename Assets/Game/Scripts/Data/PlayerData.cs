@@ -14,6 +14,5 @@ public class PlayerData : ScriptableObject
 
 
     [Header("소지 물품")]
-    //현재는 골드만 설정하고 이후 아이템 추가 예정
     public int gold;
 }

@@ -120,12 +120,11 @@ public class GameManager : Singleton<GameManager>
         playerModel = playerData.LoadData();
         if (playerModel != null)
         {
-            Debug.Log("데이터 있어서 쓴다");
             return;
         }
         else
         {
-            Debug.Log("데이터 없어서 새로 만든다");
+            Debug.Log("저장된 데이터가 없어서 새로 제작");
             playerModel = new PlayerModel(initialPlayerData.hp, initialPlayerData.mp, initialPlayerData.defence, initialPlayerData.damage,
         initialPlayerData.attackRange, initialPlayerData.moveSpeed, initialPlayerData.jumpForce, initialPlayerData.gold);
             playerData.SaveData(playerModel);
@@ -134,18 +133,7 @@ public class GameManager : Singleton<GameManager>
 
     private void SetGameData()
     {
+        Debug.Log("데이터를 저장");
         playerData.SaveData(playerModel);
-        //        playerData.hp = playerModel.MaxHp;
-        //        playerData.hp = playerModel.MaxMp;
-        //        playerData.defence = playerModel.Defence;
-        //        playerData.damage = playerModel.Damage;
-        //        playerData.attackRange = playerModel.AttackRange;
-        //        playerData.moveSpeed = playerModel.MoveSpeed;
-        //        playerData.jumpForce = playerModel.JumpForce;
-
-        //        playerData.gold = playerModel.Gold;
-        //#if UNITY_EDITOR
-        //        EditorUtility.SetDirty(playerData);
-        //#endif
     }
 }
