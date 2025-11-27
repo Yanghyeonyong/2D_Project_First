@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System;
 using UnityEngine;
+//직렬화를 통해 인스펙터에서 데이터 조작
 [System.Serializable]
 public class EnemyModel
 {
@@ -47,6 +48,7 @@ public class EnemyModel
 
     public event Action<float> OnHealthChange;
 
+    //객체 초기화
     public EnemyModel(float maxHp, float curHp, float damage, float defence, float moveSpeed, float detectRange, float attackRange, float bulletSpeed, float attackSpeed, int exp, int gold)
     {
         this.maxHp = maxHp;
@@ -62,6 +64,7 @@ public class EnemyModel
         this.gold = gold;
     }
 
+    //테스트용
     public EnemyModel(float maxHp, int exp)
     {
         this.maxHp = maxHp;
@@ -83,6 +86,7 @@ public class EnemyModel
         return true;
     }
 
+    //HP 설정
     public void Init()
     {
         curHp = maxHp;

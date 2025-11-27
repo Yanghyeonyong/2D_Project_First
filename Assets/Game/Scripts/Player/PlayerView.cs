@@ -9,6 +9,7 @@ public class PlayerView : MonoBehaviour
     [SerializeField] Image mpBanner;
     [SerializeField] GameObject levelUpPage;
 
+    //HP, MP 표시
     public void UpdatePlayerHP(float amount)
     {
         hpBanner.fillAmount = amount;
@@ -18,6 +19,7 @@ public class PlayerView : MonoBehaviour
         mpBanner.fillAmount = amount;
     }
 
+    //모델 기반 스탯 작성
     public void UpdateStatus(PlayerModel playerModel)
     {
         statusTexts[0].text = $"HP: {playerModel.CurHp} / {playerModel.MaxHp}";
@@ -28,8 +30,8 @@ public class PlayerView : MonoBehaviour
         statusTexts[5].text = $"Speed: {playerModel.MoveSpeed}";
         statusTexts[6].text = $"Jump: {playerModel.JumpForce}";
         statusTexts[7].text = $"{playerModel.Gold}$";
-
     }
+    //탑에서의 능력치 작성
     public void UpdateStatus(PlayerModel playerModel, PlayerModel_Dongeon playerModel_Dongeon)
     {
         statusTexts[0].text = $"HP: {playerModel.CurHp} / {playerModel.MaxHp}";
@@ -44,14 +46,12 @@ public class PlayerView : MonoBehaviour
 
     public void LevelUpPageOpen(int levelUpCount)
     {
-        Debug.Log("여기까지 왔다");
-        //levelUpPage.SetActive(true);
         StartCoroutine(LevelUp(levelUpCount));
     }
 
     IEnumerator LevelUp(int levelUpCount)
     {
-        Debug.Log("코루틴 시작");
+        //능력치 선택 전까지 코루틴 계속 진행, 무적 상태 지속
         while (levelUpCount > 0)
         {
             Debug.Log(levelUpCount+"번째");
@@ -68,6 +68,8 @@ public class PlayerView : MonoBehaviour
     [SerializeField] GameObject[] dieObject;
     [SerializeField] Image fadeImage;
     [SerializeField] TextMeshProUGUI fadeText;
+
+    //사망시 재생하는 페이드아웃
     public IEnumerator DieAnimation(float dieAnimationTime)
     {
         foreach (GameObject obj in dieObject)

@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class PlayerController_State : MonoBehaviour
 {
+    //상태 체크
     private IPlayerState _currentState;
 
     //이동 방향
@@ -61,9 +62,13 @@ public class PlayerController_State : MonoBehaviour
     [SerializeField] Vector2 crouchColiderSize = new Vector2(2f, 1f);
     public Vector2 CrouchColiderSize => crouchColiderSize;
 
+    //플레이어 정보
     public PlayerModel playerModel;
+    //플레이어 UI 변환
     [SerializeField] private PlayerView playerView;
+    //플레이어 능력치 확인 패널
     [SerializeField] private GameObject playerInformationTab;
+    //던전에서의 플레이어 정보 
     public PlayerModel_Dongeon playerModel_Dongeon;
 
 
@@ -73,7 +78,7 @@ public class PlayerController_State : MonoBehaviour
     [SerializeField] float hitTime;
     WaitForSeconds changeTime;
 
-
+    //플레이어의 얼굴을 촬영하는 카메라(렌더 텍스처용)
     [SerializeField] GameObject playerFaceCamera;
     public GameObject PlayerFaceCamera => playerFaceCamera;
     Vector3 originCameraPos;
@@ -87,19 +92,25 @@ public class PlayerController_State : MonoBehaviour
         originCameraPos = playerFaceCamera.transform.localPosition;
     }
 
+    //테스트 시 true로 설정
     public bool onTest = false;
 
+    //플레이어 위치 정보
     [SerializeField] Transform pos;
     public Transform Pos => pos;
 
+    //투사체 종류
     [SerializeField] int bulletIndex;
     public int BulletIndex => bulletIndex;
 
+    //투사체 프리팹
     [SerializeField] GameObject skill;
     public GameObject Skill => skill;
+    //스킬 사용시 소모 MP
     [SerializeField] float usingSkillMp;
     public float UsingSkillMp => usingSkillMp;
-
+    
+    //효과음
     [SerializeField] AudioClip[] effectAudios;
     public AudioClip[] EffectAudios => effectAudios;
     private void Start()
@@ -109,43 +120,49 @@ public class PlayerController_State : MonoBehaviour
         {
             playerModel = GameManager.Instance.playerModel;
         }
+        //타워에선 PlayerModel_Dongeon 정보 사용
         if (GameManager.Instance.curStage == 2)
         {
             playerModel_Dongeon = GameManager.Instance.playerModel_Dongeon;
         }
         else
         {
+            //타워 아니면 초기화
             playerModel_Dongeon = new PlayerModel_Dongeon(playerModel);
         }
 
+        //플레이어 초기 콜라이더 저장 
         myCol = GetComponent<BoxCollider2D>();
         originalColiderOffset = myCol.offset;
         originalColiderSize = myCol.size;
 
         rb = GetComponent<Rigidbody2D>();
 
-        //checkGround.SetAnimaotr(animator);
-        UpdateInfo();
-        GameManager.Instance.playerView = playerView;
 
+        //UpdateInfo();
+        //매니저에 플레이어 뷰 전달
+        GameManager.Instance.playerView = playerView;
 
         originColor = spriteRenderer.color;
 
         playerModel.Init();
 
+        //플레이어 HP와 MP UI에 표시
         playerView.UpdatePlayerHP(playerModel.CurHp / playerModel.MaxHp);
         playerView.UpdatePlayerMP(playerModel.CurMp / playerModel.MaxMp);
+        //플레이어 능력치 View에 전달
         UpdateInfo();
 
+        //기본 상태 설정
         SetState(new IdleState(this));
 
+        //무적 상태 해제
         GameManager.Instance.IsInvincible = false;
-
-        Debug.Log("현재 체력 : " + playerModel.CurHp);
     }
 
     private void Update()
     {
+        //땅에 닿았는지 확인
         isGrounded = Physics2D.Raycast(
         _groundChecker.position,
         Vector2.down,
@@ -157,6 +174,7 @@ public class PlayerController_State : MonoBehaviour
     }
     private void FixedUpdate()
     {
+        //각 State에 따른 update 실행
         if (!GameManager.Instance.IsInvincible)
         {
             _currentState.OnUpdate();
@@ -175,13 +193,13 @@ public class PlayerController_State : MonoBehaviour
     //이동
     public void OnMove(InputAction.CallbackContext ctx)
     {
+        //무적상태에서는 실행 불가능
         if (!GameManager.Instance.IsInvincible)
         {
-            moveDir = ctx.ReadValue<Vector2>();
             //값을 입력받아 벡터2로 변환
+            moveDir = ctx.ReadValue<Vector2>();
             if (ctx.performed && !isCrouch)
             {
-                //moveDir = ctx.ReadValue<Vector2>();
                 //상태 변환
                 SetState(new RunState(this));
             }
@@ -189,8 +207,6 @@ public class PlayerController_State : MonoBehaviour
             //이동 종료시 걷기 애니메이션 종료
             if (ctx.canceled)
             {
-                //moveDir = Vector2.zero;
-
                 SetState(new IdleState(this));
             }
 
@@ -214,6 +230,7 @@ public class PlayerController_State : MonoBehaviour
     {
         if (!GameManager.Instance.IsInvincible)
         {
+            //웅크린 상태에서는 불가능
             if (ctx.performed && !isCrouch)
             {
                 SetState(new AttackState(this));
@@ -260,7 +277,7 @@ public class PlayerController_State : MonoBehaviour
     //플레이어 정보 확인
     public void UpdateInfo()
     {
-
+        //플레이어 정보창에 모델 기반 능력치 값 작성
         if (GameManager.Instance.curStage != 2)
         {
             playerView.UpdateStatus(playerModel);
@@ -272,6 +289,7 @@ public class PlayerController_State : MonoBehaviour
 
     }
 
+    //플레이어 정보창 활성화
     public void OnPlayerInfo(InputAction.CallbackContext ctx)
     {
         if (!GameManager.Instance.IsInvincible)
@@ -284,18 +302,8 @@ public class PlayerController_State : MonoBehaviour
         }
     }
 
-    [SerializeField] int testExp;
-    //데미지를 입었을 경우 발생하는 메서드
-    public void TestTakeDamage(InputAction.CallbackContext ctx)
-    {
-        if (ctx.started)
-        {
-            //OnTakeDamage(31f);
-            KillMonster(testExp, 100);
-        }
-    }
 
-
+    //피격시
     private Coroutine damgageCoroutine;
     [SerializeField] float dieAnimationTime = 2f;
     public void OnTakeDamage(float takeDamage)
@@ -304,16 +312,15 @@ public class PlayerController_State : MonoBehaviour
         if (!GameManager.Instance.IsInvincible)
         {
             SoundManager.Instance.PlayEffect(effectAudios[6]);
-            Debug.Log("현재 " + takeDamage + " 데미지를 받았다");
             if (GameManager.Instance.curStage == 2)
             {
                 isDie = playerModel_Dongeon.TakeDamage(takeDamage);
-
             }
             else
             {
                 playerModel.TakeDamage(takeDamage);
             }
+            //피격 코루틴 실행
             if (damgageCoroutine == null)
             {
                 damgageCoroutine = StartCoroutine(TakeDamageCharacter());
@@ -323,9 +330,12 @@ public class PlayerController_State : MonoBehaviour
                 StopCoroutine(damgageCoroutine);
                 damgageCoroutine = StartCoroutine(TakeDamageCharacter());
             }
+            //정보창 재작성
             UpdateInfo();
+            //HP 표시
             playerView.UpdatePlayerHP(playerModel.CurHp / playerModel.MaxHp);
 
+            //사망시 코루틴 실행 및 최고 점수 확인
             if (!isDie)
             {
                 //현재 tower 맵 시작 위치가 -6.xxx부터 시작하여 + 6 
@@ -336,6 +346,7 @@ public class PlayerController_State : MonoBehaviour
             }
         }
     }
+    //피격시 표시
     IEnumerator TakeDamageCharacter()
     {
         for (int i = 0; i < 2; i++)
@@ -347,6 +358,7 @@ public class PlayerController_State : MonoBehaviour
         }
     }
 
+    //몬스터 처치시 exp와 gold 모델에 전달 및 MP 회복
     public void KillMonster(int exp, int gold)
     {
         playerModel.HealingMp();
@@ -356,9 +368,9 @@ public class PlayerController_State : MonoBehaviour
         int levelUpCount = playerModel_Dongeon.LevelUp(exp);
         if (levelUpCount > 0)
         {
+            //레벨업시 능력치 증가 버튼 누르기 전까지 무적
             SoundManager.Instance.PlayEffect(effectAudios[5]);
             GameManager.Instance.IsInvincible = true;
-            Debug.Log("무적 상태 시작");
             playerView.LevelUpPageOpen(levelUpCount);
         }
     }

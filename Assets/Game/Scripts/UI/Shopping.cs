@@ -2,16 +2,21 @@ using UnityEngine;
 
 public class Shopping : MonoBehaviour
 {
+    //능력시 상승량
     [SerializeField] float[] upgradeRate;
+    //능력치 상승에 필요 골드
     [SerializeField] int[] upgradeGold;
+    //상점 페이지
     [SerializeField] GameObject shopPage;
     bool shopOpen = false;
 
+    //상점 열기 닫기
     public void OnOffShop()
     {
         shopOpen = UIManager.Instance.OnOffUI(shopPage, shopOpen);
     }
 
+    //각 능력치 골드를 소비하여 업그레이드
     public void HpUpgrade()
     {
         if (!GameManager.Instance.playerModel.BuyStatus(upgradeGold[0]))

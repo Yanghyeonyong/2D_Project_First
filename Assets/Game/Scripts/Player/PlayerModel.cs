@@ -61,27 +61,28 @@ public class PlayerModel
 
     public bool TakeDamage(float takeDamage)
     {
-        //방어력으로 인한 피격 데미지 감소
+        //방어력으로 인한 피격 데미지 감소(2차)
         curHp -= Mathf.Max(0,takeDamage-defence);
         if (curHp <= 0)
         {
             curHp = 0;
             return false;
         }
-        OnHealthChange?.Invoke(curHp);
         return true;
     }
 
+    //스킬 사용시 마나 감소
     public void UsingSkill(float usingMp)
     {
         curMp -= usingMp;
     }
-
+    //최대 마나의 20% 회복
     public void HealingMp()
     {
         curMp = Mathf.Min(MaxMp, curMp + MaxMp / 5);
     }
 
+    //능력치 구매시 골드 감소
     public bool BuyStatus(int usingGold)
     {
         if (usingGold > gold)
@@ -93,6 +94,7 @@ public class PlayerModel
         }
     }
 
+    //능력치 증가
     public void ChangeStatus(int statType, float statPoint)
     {
         switch (statType)
@@ -121,11 +123,13 @@ public class PlayerModel
         }
     }
 
+    //골드 증가
     public void GetMoney(int getGold)
     {
         gold += getGold;
     }
 
+    //최고 점수 기록
     public void SetBestScore(float curScore)
     {
         score = MathF.Max(score, curScore);

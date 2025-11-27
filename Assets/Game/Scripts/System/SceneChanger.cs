@@ -3,15 +3,13 @@ using UnityEngine.SceneManagement;
 
 public class SceneChanger : MonoBehaviour
 {
-    int sceneNum;
+    //씬 이동 스크립트
     public void NextScene()
     {
-        //StartCoroutine(GameManager.Instance.MoveScene(1));
         GameManager.Instance.StartCoroutine(GameManager.Instance.MoveScene(1));
     }
     public void PrevScene()
     {
-        //StartCoroutine(GameManager.Instance.MoveScene(-1));
         GameManager.Instance.StartCoroutine(GameManager.Instance.MoveScene(-1));
     }
     public void TitleScene()
@@ -20,7 +18,6 @@ public class SceneChanger : MonoBehaviour
     }
     public void VillageScene()
     {
-        //StartCoroutine(GameManager.Instance.MoveScene(0,1));
         GameManager.Instance.StartCoroutine(GameManager.Instance.MoveScene(0, 1));
     }
 

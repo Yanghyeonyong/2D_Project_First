@@ -21,9 +21,12 @@ public class AttackState : IPlayerState
     //이동 시 애니메이션 적용
     public void OnEnter()
     {
+        //애니메이션 실행
         _anim.SetTrigger("IsAttack");
         SoundManager.Instance.PlayEffect(_player.EffectAudios[0]);
+        //공격 범위에 몬스터 있는지 확인
         RaycastHit2D[] hit = CheckEnemy();
+        //있다면 모든 몬스터에게 데미지
         foreach (RaycastHit2D enemy in hit)
         {
             enemy.collider.gameObject.GetComponent<EnemyController>().OnTakeDamage(_player.playerModel_Dongeon.ReturnTotalStatus(1));
@@ -38,7 +41,7 @@ public class AttackState : IPlayerState
     {
     }
 
-    //플레이어가 레이 범위에 있는지 체크
+    //몬스터가 박스캐스트 범위에 있는지 체크
     private RaycastHit2D[] CheckEnemy()
     {
         RaycastHit2D[] hit = Physics2D.BoxCastAll(

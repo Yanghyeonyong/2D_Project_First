@@ -15,6 +15,7 @@ public class AudioManager : MonoBehaviour
         myAudio.volume = volumeSize;
     }
 
+    //슬라이더 찾아서 오디오 볼륨과 연동
     public void ChangeVolume()
     {
         if (mySlide == null)

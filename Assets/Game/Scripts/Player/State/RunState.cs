@@ -22,14 +22,14 @@ public class RunState : IPlayerState
     //이동 시 애니메이션 적용
     public void OnEnter()
     {
+        //이동 방향 가져오고 애니메이션 실행
         moveDir = _player.MoveDir;
         _anim.SetBool("IsWalk", true);
     }
 
-    //종료 시 운동량 0, 애니메이션 종료
     public void OnExit()
     {
-        //rb.linearVelocity = Vector2.zero;
+    //종료 시 운동량 0, 애니메이션 종료
         rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
         _anim.SetBool("IsWalk", false);
     }
@@ -48,7 +48,6 @@ public class RunState : IPlayerState
         }
 
         //입력하는 경우 이동
-        //rb.linearVelocity = new Vector2(moveDir.x * moveSpeed, rb.linearVelocity.y);
         rb.linearVelocity = new Vector2(moveDir.x * moveSpeed, rb.linearVelocity.y);
 
         //입력값 0이면 상태 변환

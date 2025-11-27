@@ -19,11 +19,12 @@ public class IdleState : IPlayerState
     {
         if (_player.MoveDir.x == 0)
         {
-            //rb.linearVelocity = Vector2.zero;
+            //입력 멈추면 운동량도 0
             rb.linearVelocity = new Vector2(0, rb.linearVelocity.y);
         }
         else
         {
+            //있다면 상태 전환
             _player.SetState(new RunState(_player));
         }
     }

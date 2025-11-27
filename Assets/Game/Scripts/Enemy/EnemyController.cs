@@ -4,24 +4,30 @@ using UnityEngine;
 
 public class EnemyController : MonoBehaviour
 {
-
+    //몬스터의 데이터
     public EnemyModel enemyModel;
     [SerializeField] private EnemyView enemyView;
 
+    //투사체 종류
     public GameObject bullet;
 
+    //투사체 소환 위치
     [SerializeField] Transform spawnPos;
     public Transform SpawnPos =>spawnPos;
 
+    //플레이어
     GameObject player;
 
+    //객체의 스프라이트 렌더러
     SpriteRenderer spriteRenderer;
     Color originColor;
 
+    //몬스터 사방 여부 판단
     [SerializeField] bool isDie = false;
     public bool IsDie => isDie;
 
 
+    //효과음
     [SerializeField] AudioClip[] effectAudios;
     public AudioClip[] EffectAudios => effectAudios;
 
@@ -35,6 +41,8 @@ public class EnemyController : MonoBehaviour
     {
         EnemyInit();
     }
+
+    //데이터 초기화
     private void EnemyInit()
     {
         enemyModel.Init();
@@ -43,6 +51,7 @@ public class EnemyController : MonoBehaviour
         isDie = false ;
     }
 
+    //플레이어에게 피격 시 HP 감소, HP가 0일 경우 Die 코루틴 실행
     public void OnTakeDamage(float takeDamage)
     {
         SoundManager.Instance.PlayEffect(effectAudios[1]);
@@ -59,11 +68,13 @@ public class EnemyController : MonoBehaviour
             }
             player.GetComponent<PlayerController_State>().KillMonster(enemyModel.Exp, enemyModel.Gold);
 
-            //gameObject.SetActive(false);
             StartCoroutine(DieAnimation());
         }
     }
+
+    //애니메이션 지속 시간
     [SerializeField] float dieAnimationTime = 1f;
+    //사망 시 점차 투명해지는 코루틴
     IEnumerator DieAnimation()
     {
         isDie = true;
@@ -78,11 +89,13 @@ public class EnemyController : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    //객체 능력치 강화
     public void EnemyUpgrade(float upgradeRate)
     {
         enemyModel.EnemyUpgrade(upgradeRate);
     }
 
+    //플레이어 충돌 시 플레이어에게 데미지
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.layer == 8)

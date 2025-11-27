@@ -45,6 +45,7 @@ public class PlayerModel_Dongeon
         return playerModel.TakeDamage(takeDamage);
     }
 
+    //능력치 증가
     public void ChangeStatus(int statType, float statPoint)
     {
         switch (statType)
@@ -67,6 +68,7 @@ public class PlayerModel_Dongeon
         }
     }
 
+    //최종 능력치 반환
     public float ReturnTotalStatus(int statType)
     {
         switch (statType)
@@ -85,6 +87,7 @@ public class PlayerModel_Dongeon
         return 0;
     }
 
+    //레벨업 시 총 레벨 상승량 반환 및 경험치 초기화
     public int LevelUp(int exp)
     {
         int levelUpCount = 0;
@@ -93,7 +96,6 @@ public class PlayerModel_Dongeon
         {
             while (curExp >= maxExp)
             {
-                Debug.Log("레벨업!");
                 curExp -= maxExp;
                 levelUpCount++;
             }
