@@ -21,7 +21,7 @@ public partial class PatrolAction : Action
 
     protected override Status OnUpdate()
     {
-        if (EnemyController.Value.IsDie)
+        if (EnemyController.Value.IsDie|| GameManager.Instance.IsInvincible)
             return Status.Failure;
 
         if (WayPoint.Value.Count == 0)

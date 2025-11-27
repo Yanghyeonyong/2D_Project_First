@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1987168699041074652}
   - component: {fileID: 7250644431275198007}
-  - component: {fileID: 6052656914066742379}
+  - component: {fileID: 5865215632482986875}
   m_Layer: 0
   m_Name: CinemachineCamera
   m_TagString: Untagged
@@ -76,7 +76,7 @@ MonoBehaviour:
       BarrelClipping: 0.25
       Anamorphism: 0
   BlendHint: 0
---- !u!114 &6052656914066742379
+--- !u!114 &5865215632482986875
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -85,21 +85,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 3633603253027185542}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f38bda98361e1de48a4ca2bd86ea3c17, type: 3}
+  m_Script: {fileID: 11500000, guid: 886251e9a18ece04ea8e61686c173e1b, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineRotationComposer
+  m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachinePositionComposer
+  CameraDistance: 10
+  DeadZoneDepth: 0
   Composition:
-    ScreenPosition: {x: 0.0031251162, y: -0.046296313}
+    ScreenPosition: {x: 0, y: 0.3}
     DeadZone:
       Enabled: 1
-      Size: {x: 0.3934665, y: 0.4439672}
+      Size: {x: 0.2, y: 0.3}
     HardLimits:
       Enabled: 0
       Size: {x: 0.8, y: 0.8}
       Offset: {x: 0, y: 0}
   CenterOnActivate: 1
-  TargetOffset: {x: 0, y: 3, z: 0}
-  Damping: {x: 0.5, y: 0.5}
+  TargetOffset: {x: 0, y: 0, z: 0}
+  Damping: {x: 1, y: 1, z: 1}
   Lookahead:
     Enabled: 0
     Time: 0

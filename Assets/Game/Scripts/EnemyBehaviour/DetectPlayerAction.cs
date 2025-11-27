@@ -26,7 +26,7 @@ public partial class DetectPlayerAction : Action
 
     protected override Status OnUpdate()
     {
-        if (EnemyController.Value.IsDie)
+        if (EnemyController.Value.IsDie || GameManager.Instance.IsInvincible)
             return Status.Failure;
         //float distance = Vector2.Distance(Self.Value.transform.position, Player.Value.transform.position);
         float distance = Vector2.Distance(Self.Value.transform.position, player.transform.position);

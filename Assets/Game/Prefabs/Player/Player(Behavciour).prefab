@@ -282,7 +282,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1374557600937374246}
   - component: {fileID: 6886325607491278669}
-  - component: {fileID: 1363580689544288080}
   - component: {fileID: 5241112652601708949}
   m_Layer: 0
   m_Name: Camera
@@ -357,14 +356,6 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
---- !u!81 &1363580689544288080
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1470300185716061637}
-  m_Enabled: 1
 --- !u!114 &5241112652601708949
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -668,6 +659,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 3098e894-039c-4f9b-825f-92bd48c7f01a
     m_ActionName: 'Player/Test[/Keyboard/0]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 857989424879452815}
+        m_TargetAssemblyTypeName: PlayerController_State, Assembly-CSharp
+        m_MethodName: OnSkill
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 1d592f68-4d49-477a-adec-bc2e7fd2d7c1
+    m_ActionName: 'Player/Skill[/Mouse/rightButton]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: 
@@ -722,6 +729,11 @@ MonoBehaviour:
   hitTime: 0.1
   playerFaceCamera: {fileID: 1470300185716061637}
   crouchCameraPos: {x: 0, y: -1.5, z: -1}
+  onTest: 0
+  pos: {fileID: 1344938684326994968}
+  bulletIndex: 6
+  skill: {fileID: 4777081729256371218, guid: 8c6d1baccb7cab04e837acab7a1cbc20, type: 3}
+  usingSkillMp: 20
   layerMask:
     serializedVersion: 2
     m_Bits: 64

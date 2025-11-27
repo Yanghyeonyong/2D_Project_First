@@ -147,7 +147,10 @@ public class PlayerController_State : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        _currentState.OnUpdate();
+        if (!GameManager.Instance.IsInvincible)
+        {
+            _currentState.OnUpdate();
+        }
     }
 
 
@@ -162,49 +165,62 @@ public class PlayerController_State : MonoBehaviour
     //이동
     public void OnMove(InputAction.CallbackContext ctx)
     {
-        moveDir = ctx.ReadValue<Vector2>();
-        //값을 입력받아 벡터2로 변환
-        if (ctx.performed && !isCrouch)
+        if (!GameManager.Instance.IsInvincible)
         {
-            //moveDir = ctx.ReadValue<Vector2>();
-            //상태 변환
-            SetState(new RunState(this));
-        }
+            moveDir = ctx.ReadValue<Vector2>();
+            //값을 입력받아 벡터2로 변환
+            if (ctx.performed && !isCrouch)
+            {
+                //moveDir = ctx.ReadValue<Vector2>();
+                //상태 변환
+                SetState(new RunState(this));
+            }
 
-        //이동 종료시 걷기 애니메이션 종료
-        if (ctx.canceled)
-        {
-            //moveDir = Vector2.zero;
+            //이동 종료시 걷기 애니메이션 종료
+            if (ctx.canceled)
+            {
+                //moveDir = Vector2.zero;
 
-            SetState(new IdleState(this));
+                SetState(new IdleState(this));
+            }
+
         }
     }
 
     //점프
     public void OnJump(InputAction.CallbackContext ctx)
     {
-        //땅에 닿았을 때만
-        if (ctx.performed && isGrounded)
+        if (!GameManager.Instance.IsInvincible)
         {
-            SetState(new JumpState(this));
+            //땅에 닿았을 때만
+            if (ctx.performed && isGrounded)
+            {
+                SetState(new JumpState(this));
+            }
         }
     }
 
     public void OnAttack(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !isCrouch)
+        if (!GameManager.Instance.IsInvincible)
         {
-            SetState(new AttackState(this));
+            if (ctx.performed && !isCrouch)
+            {
+                SetState(new AttackState(this));
+            }
         }
     }
 
     public void OnSkill(InputAction.CallbackContext ctx)
     {
-        if (ctx.performed && !isCrouch)
+        if (!GameManager.Instance.IsInvincible)
         {
-            Debug.Log("스킬 발동 시도");
-            SetState(new SkillState(this));
-            playerView.UpdatePlayerMP(playerModel.CurMp / playerModel.MaxMp);
+            if (ctx.performed && !isCrouch)
+            {
+                Debug.Log("스킬 발동 시도");
+                SetState(new SkillState(this));
+                playerView.UpdatePlayerMP(playerModel.CurMp / playerModel.MaxMp);
+            }
         }
     }
 
@@ -214,39 +230,47 @@ public class PlayerController_State : MonoBehaviour
     //엎드리기
     public void OnCrouch(InputAction.CallbackContext ctx)
     {
-        //Idle 애니메이션 상태에서만 실행하라
-        if (ctx.performed && animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+        if (!GameManager.Instance.IsInvincible)
         {
-            isCrouch = true;
-            SetState(new CrouchState(this));
-        }
-        //엎드리기 해제
-        if (ctx.canceled)
-        {
-            SetState(new IdleState(this));
-            isCrouch = false;
+            //Idle 애니메이션 상태에서만 실행하라
+            if (ctx.performed && animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            {
+                isCrouch = true;
+                SetState(new CrouchState(this));
+            }
+            //엎드리기 해제
+            if (ctx.canceled)
+            {
+                SetState(new IdleState(this));
+                isCrouch = false;
+            }
         }
     }
 
     //플레이어 정보 확인
     public void UpdateInfo()
     {
-        if (GameManager.Instance.curStage != 2)
-        {
-            playerView.UpdateStatus(playerModel);
-        }
-        else
-        {
-            playerView.UpdateStatus(playerModel, playerModel_Dongeon);
-        }
-        playerView.UpdatePlayerHP(playerModel.CurHp / playerModel.MaxHp);
+
+            if (GameManager.Instance.curStage != 2)
+            {
+                playerView.UpdateStatus(playerModel);
+            }
+            else
+            {
+                playerView.UpdateStatus(playerModel, playerModel_Dongeon);
+            }
+
     }
 
     public void OnPlayerInfo(InputAction.CallbackContext ctx)
     {
+    if (!GameManager.Instance.IsInvincible)
+    {
         if (ctx.started)
         {
             playerInformationTab.SetActive(!playerInformationTab.activeSelf);
+        }
+            playerView.UpdatePlayerHP(playerModel.CurHp / playerModel.MaxHp);
         }
     }
 
@@ -265,25 +289,29 @@ public class PlayerController_State : MonoBehaviour
     private Coroutine damgageCoroutine;
     public void OnTakeDamage(float takeDamage)
     {
-        if (GameManager.Instance.curStage == 2)
+        if (!GameManager.Instance.IsInvincible)
         {
-            playerModel_Dongeon.TakeDamage(takeDamage);
+            Debug.Log("데미지를 받았다");
+            if (GameManager.Instance.curStage == 2)
+            {
+                playerModel_Dongeon.TakeDamage(takeDamage);
+            }
+            else
+            {
+                playerModel.TakeDamage(takeDamage);
+            }
+            if (damgageCoroutine == null)
+            {
+                damgageCoroutine = StartCoroutine(TakeDamageCharacter());
+            }
+            else
+            {
+                StopCoroutine(damgageCoroutine);
+                damgageCoroutine = StartCoroutine(TakeDamageCharacter());
+            }
+            UpdateInfo();
+            playerView.UpdatePlayerHP(playerModel.CurHp / playerModel.MaxHp);
         }
-        else
-        {
-            playerModel.TakeDamage(takeDamage);
-        }
-        if (damgageCoroutine == null)
-        {
-            damgageCoroutine = StartCoroutine(TakeDamageCharacter());
-        }
-        else
-        {
-            StopCoroutine(damgageCoroutine);
-            damgageCoroutine = StartCoroutine(TakeDamageCharacter());
-        }
-        UpdateInfo();
-        playerView.UpdatePlayerHP(playerModel.CurHp / playerModel.MaxHp);
     }
     IEnumerator TakeDamageCharacter()
     {
@@ -305,7 +333,8 @@ public class PlayerController_State : MonoBehaviour
         int levelUpCount = playerModel_Dongeon.LevelUp(exp);
         if (levelUpCount > 0)
         {
-            Debug.Log("스탯 올려야징");
+            GameManager.Instance.IsInvincible = true;
+            Debug.Log("무적 상태 시작");
             playerView.LevelUpPageOpen(levelUpCount);
         }
     }

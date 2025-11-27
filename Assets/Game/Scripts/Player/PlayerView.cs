@@ -55,10 +55,12 @@ public class PlayerView : MonoBehaviour
         while (levelUpCount > 0)
         {
             Debug.Log(levelUpCount+"번째");
-            //yield return !levelUpPage.activeSelf;
             yield return new WaitUntil(() => !levelUpPage.activeSelf);
             levelUpPage.SetActive(true);
             levelUpCount--;
         }
+        yield return new WaitUntil(() => !levelUpPage.activeSelf);
+        GameManager.Instance.IsInvincible = false;
+        Debug.Log("무적 종료");
     }
 }

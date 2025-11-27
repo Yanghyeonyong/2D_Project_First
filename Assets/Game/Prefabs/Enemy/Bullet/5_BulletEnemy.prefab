@@ -159,6 +159,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4542787156424245712, guid: edf555e43577b974fb065b3e39283bae, type: 3}
+      propertyPath: m_SortingOrder
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 6920313795440836961, guid: edf555e43577b974fb065b3e39283bae, type: 3}
       propertyPath: m_Name
       value: Buller_Enemy

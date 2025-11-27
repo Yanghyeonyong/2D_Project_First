@@ -26,6 +26,18 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] GameObject player;
     [SerializeField] Transform playerSpawnPos;
     [SerializeField] GameObject playerCamera;
+    private bool isInvincible = false;
+    public bool IsInvincible
+    {
+        get
+        {
+            return isInvincible;
+        }
+        set
+        {
+            isInvincible = value;
+        }
+    }
 
     void Start()
     {
@@ -39,26 +51,28 @@ public class GameManager : Singleton<GameManager>
 
     }
 
-    public IEnumerator MoveScene(int move)
+    public IEnumerator MoveScene(int move, int indexMove=-1)
     {
-        curStage += move;
+        if (indexMove == -1)
+        {
+            curStage += move;
+        }
+        else
+        {
+            curStage = indexMove;
+        }
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(curStage);
         while (!asyncLoad.isDone)
         {
             yield return null;
         }
 
-        //yield return new WaitUntil(() => asyncLoad.isDone);
-
-
         if (curStage > 0 && curStage < 3)
         {
-            Debug.Log("플레이어 소화ㅏㅏㅏㅏㅏㅏㅏㄴ");
             GameObject myPlayer = Instantiate(player, new Vector3(0, 1, 0), Quaternion.identity);
             GameObject myCamera = Instantiate(playerCamera);
             myCamera.GetComponent<CinemachineCamera>().Target.TrackingTarget = myPlayer.transform;
             UIManager.Instance.OnOffUI(UIManager.Instance.title, true);
-            //UIManager.Instance.OnOffTitle(false);
         }
         else if (curStage == 0)
         {
@@ -80,7 +94,10 @@ public class GameManager : Singleton<GameManager>
     {
         curStage = 0;
         SceneManager.LoadScene(curStage);
+        UIManager.Instance.OnOffUI(UIManager.Instance.title, false);
     }
+
+
     public void GameExit()
     {
 #if UNITY_EDITOR

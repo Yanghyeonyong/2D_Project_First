@@ -16,6 +16,10 @@ public class SceneChanger : MonoBehaviour
     {
         GameManager.Instance.TitleScene();
     }
+    public void VillageScene()
+    {
+        StartCoroutine(GameManager.Instance.MoveScene(0,1));
+    }
 
     public void GameExit()
     {

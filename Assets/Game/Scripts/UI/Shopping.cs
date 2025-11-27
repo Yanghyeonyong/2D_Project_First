@@ -4,12 +4,12 @@ public class Shopping : MonoBehaviour
 {
     [SerializeField] float[] upgradeRate;
     [SerializeField] int[] upgradeGold;
-    [SerializeField] GameObject shopPanel;
+    [SerializeField] GameObject shopPage;
     bool shopOpen = false;
 
     public void OnOffShop()
     {
-        shopOpen = UIManager.Instance.OnOffUI(shopPanel, shopOpen);
+        shopOpen = UIManager.Instance.OnOffUI(shopPage, shopOpen);
     }
 
     public void HpUpgrade()
