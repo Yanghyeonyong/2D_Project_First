@@ -3,6 +3,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class PlayerController_State : MonoBehaviour
 {
@@ -87,7 +88,7 @@ public class PlayerController_State : MonoBehaviour
         originCameraPos = playerFaceCamera.transform.localPosition;
     }
 
-    public bool onTest=false;
+    public bool onTest = false;
 
     [SerializeField] Transform pos;
     public Transform Pos => pos;
@@ -100,6 +101,8 @@ public class PlayerController_State : MonoBehaviour
     [SerializeField] float usingSkillMp;
     public float UsingSkillMp => usingSkillMp;
 
+    [SerializeField] AudioClip[] effectAudios;
+    public AudioClip[] EffectAudios => effectAudios;
     private void Start()
     {
         //저장된 데이터 가져옴
@@ -139,7 +142,7 @@ public class PlayerController_State : MonoBehaviour
 
         GameManager.Instance.IsInvincible = false;
 
-        Debug.Log("현재 체력 : "+ playerModel.CurHp);
+        Debug.Log("현재 체력 : " + playerModel.CurHp);
     }
 
     private void Update()
@@ -150,7 +153,6 @@ public class PlayerController_State : MonoBehaviour
         _groundCheckDistance,
         _groundLayer);
 
-        //이 또한 jump에 넣을까 고민하였으나, 현재 FixedUpdate에 State Update가 들어있어 가끔 동작하지 않음을 확인
         animator.SetBool("IsGround", IsGrounded);
 
     }
@@ -260,25 +262,25 @@ public class PlayerController_State : MonoBehaviour
     public void UpdateInfo()
     {
 
-            if (GameManager.Instance.curStage != 2)
-            {
-                playerView.UpdateStatus(playerModel);
-            }
-            else
-            {
-                playerView.UpdateStatus(playerModel, playerModel_Dongeon);
-            }
+        if (GameManager.Instance.curStage != 2)
+        {
+            playerView.UpdateStatus(playerModel);
+        }
+        else
+        {
+            playerView.UpdateStatus(playerModel, playerModel_Dongeon);
+        }
 
     }
 
     public void OnPlayerInfo(InputAction.CallbackContext ctx)
     {
-    if (!GameManager.Instance.IsInvincible)
-    {
-        if (ctx.started)
+        if (!GameManager.Instance.IsInvincible)
         {
-            playerInformationTab.SetActive(!playerInformationTab.activeSelf);
-        }
+            if (ctx.started)
+            {
+                playerInformationTab.SetActive(!playerInformationTab.activeSelf);
+            }
             playerView.UpdatePlayerHP(playerModel.CurHp / playerModel.MaxHp);
         }
     }
@@ -299,13 +301,15 @@ public class PlayerController_State : MonoBehaviour
     [SerializeField] float dieAnimationTime = 2f;
     public void OnTakeDamage(float takeDamage)
     {
-        bool isDie =false;
+        bool isDie = false;
         if (!GameManager.Instance.IsInvincible)
         {
+            SoundManager.Instance.PlayEffect(effectAudios[6]);
             Debug.Log("현재 " + takeDamage + " 데미지를 받았다");
             if (GameManager.Instance.curStage == 2)
             {
                 isDie = playerModel_Dongeon.TakeDamage(takeDamage);
+
             }
             else
             {
@@ -328,12 +332,11 @@ public class PlayerController_State : MonoBehaviour
                 //현재 tower 맵 시작 위치가 -6.xxx부터 시작하여 + 6 
                 playerModel.SetBestScore(pos.position.y + 6);
                 rb.linearVelocity = Vector2.zero;
-                Debug.Log("현재 체력 : " + playerModel.CurHp);
+                SoundManager.Instance.PlayEffect(effectAudios[4]);
                 StartCoroutine(playerView.DieAnimation(dieAnimationTime));
             }
         }
     }
-
     IEnumerator TakeDamageCharacter()
     {
         for (int i = 0; i < 2; i++)
@@ -345,27 +348,6 @@ public class PlayerController_State : MonoBehaviour
         }
     }
 
-
-    //[SerializeField] GameObject[] dieObject;
-    //[SerializeField] Image fadeImage;
-    //IEnumerator DieAnimation()
-    //{
-    //    foreach (GameObject obj in dieObject)
-    //    {
-    //        obj.SetActive(true);
-    //    }
-        
-    //    GameManager.Instance.IsInvincible = true;
-    //    float timer = 0f;
-    //    while (timer <= dieAnimationTime)
-    //    {
-    //        fadeImage.color = new Color(fadeImage.color.r, fadeImage.color.g,
-    //        fadeImage.color.b, Mathf.Min(255, fadeImage.color.a + 1 / dieAnimationTime / 10));
-    //        yield return new WaitForSeconds(0.1f);
-    //        timer += 0.1f;
-    //    }
-    //}
-
     public void KillMonster(int exp, int gold)
     {
         playerModel.HealingMp();
@@ -375,6 +357,7 @@ public class PlayerController_State : MonoBehaviour
         int levelUpCount = playerModel_Dongeon.LevelUp(exp);
         if (levelUpCount > 0)
         {
+            SoundManager.Instance.PlayEffect(effectAudios[5]);
             GameManager.Instance.IsInvincible = true;
             Debug.Log("무적 상태 시작");
             playerView.LevelUpPageOpen(levelUpCount);

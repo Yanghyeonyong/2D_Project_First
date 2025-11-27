@@ -41,6 +41,7 @@ public class JumpState : IPlayerState
 
         //위로 점프
         rb.AddForce(Vector2.up * _player.playerModel_Dongeon.ReturnTotalStatus(4), ForceMode2D.Impulse);
+        SoundManager.Instance.PlayEffect(_player.EffectAudios[2]);
     }
 
     public void OnExit()

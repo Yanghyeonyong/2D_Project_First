@@ -21,7 +21,6 @@ public partial class AttackPlayerAction : Action
         if (player == null)
         {
             player = GameObject.FindFirstObjectByType<PlayerController_State>().gameObject;
-            Debug.Log("�÷��̾� ã�� attack");
         }
         return Status.Running;
     }
@@ -62,23 +61,19 @@ public partial class AttackPlayerAction : Action
                 float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
 
                 Quaternion rot = Quaternion.Euler(0f, 0f, angle);
-                //GameObject mybullet = UnityEngine.Object.Instantiate(EnemyController.Value.bullet, EnemyController.Value.SpawnPos.transform.position, rot);
-                //Debug.Log(BulletIndex.Value + "번 가져와");
                 GameObject mybullet = BulletManager.Instance.GetBullet(BulletIndex.Value);
 
                 if (mybullet != null)
                 {
-                    //Debug.Log("가져와서 사용 "+mybullet.name);
-                    //mybullet.name = "objpool";
                     mybullet.transform.rotation = rot;
                     mybullet.transform.position = EnemyController.Value.SpawnPos.transform.position;
                     mybullet.SetActive(true);
                 }
                 else
                 {
-                    Debug.Log("없어서 사용");
                     mybullet = UnityEngine.Object.Instantiate(EnemyController.Value.bullet, EnemyController.Value.SpawnPos.transform.position, rot);
                 }
+                SoundManager.Instance.PlayEffect(EnemyController.Value.EffectAudios[0]);
                 mybullet.GetComponent<Bullet>().SetBullet(EnemyController.Value.enemyModel.Damage, EnemyController.Value.enemyModel.BulletSpeed);
                 curTime = EnemyController.Value.enemyModel.AttackSpeed;
             }

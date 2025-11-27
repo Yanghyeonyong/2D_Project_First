@@ -39,15 +39,12 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    [SerializeField] AudioClip[] backGroundAudios;
+    public AudioClip[] BackGroundAudios => backGroundAudios;
+
     void Start()
     {
         GetGameData();
-
-    }
-
-
-    void Update()
-    {
 
     }
 
@@ -62,6 +59,9 @@ public class GameManager : Singleton<GameManager>
             curStage = indexMove;
         }
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(curStage);
+
+        SoundManager.Instance.PlayBGM(BackGroundAudios[curStage]);
+
         while (!asyncLoad.isDone)
         {
             yield return null;
@@ -69,7 +69,6 @@ public class GameManager : Singleton<GameManager>
 
         if (curStage > 0 && curStage < 3)
         {
-            //GameObject myPlayer = Instantiate(player, new Vector3(0, 1, 0), Quaternion.identity);
             GameObject myPlayer = Instantiate(player, playerSpawnPos[curStage - 1], Quaternion.identity);
             GameObject myCamera = Instantiate(playerCamera);
             myCamera.GetComponent<CinemachineCamera>().Target.TrackingTarget = myPlayer.transform;
@@ -95,6 +94,7 @@ public class GameManager : Singleton<GameManager>
     {
         curStage = 0;
         SceneManager.LoadScene(curStage);
+        SoundManager.Instance.PlayBGM(BackGroundAudios[curStage]);
         UIManager.Instance.OnOffUI(UIManager.Instance.title, false);
     }
 

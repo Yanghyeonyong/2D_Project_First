@@ -204,14 +204,13 @@ MonoBehaviour:
     exp: 3
     gold: 100
   enemyView: {fileID: 6914277466461701757}
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 256
-  attackPosY: 1.3
-  attackBoxSize: 6
-  attackRange: 5
   bullet: {fileID: 3743656399040736009, guid: 84824c98d2dc316458bc1d258042f068, type: 3}
   spawnPos: {fileID: 623110654150499781}
+  isDie: 0
+  effectAudios:
+  - {fileID: 8300000, guid: 323e15cfe809e114ab92c9f4b25e8bc2, type: 3}
+  - {fileID: 8300000, guid: df7087e4d8a8bb546bc08ce68632903f, type: 3}
+  dieAnimationTime: 1
 --- !u!114 &6914277466461701757
 MonoBehaviour:
   m_ObjectHideFlags: 0

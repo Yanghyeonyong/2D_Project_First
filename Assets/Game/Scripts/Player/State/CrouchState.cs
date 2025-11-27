@@ -98,8 +98,8 @@ public class CrouchState : MonoBehaviour, IPlayerState
                 _anim.SetBool("IsCrouch", false);
                 //애니메이션 실행
                 _anim.SetTrigger("IsJump");
-                //rb.AddForce(Vector2.up * _player.playerModel.JumpForce * 2f, ForceMode2D.Impulse);
                 rb.AddForce(Vector2.up * _player.playerModel_Dongeon.ReturnTotalStatus(4) * 1.5f, ForceMode2D.Impulse);
+                SoundManager.Instance.PlayEffect(_player.EffectAudios[1]);
                 isSuperJump = true;
 
                 InitColider();

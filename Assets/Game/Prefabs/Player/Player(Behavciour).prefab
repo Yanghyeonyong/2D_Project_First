@@ -798,7 +798,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController_State
   animator: {fileID: 3347803370455552518}
   downJump: 3
-  superJumpDelay: 3
+  superJumpDelay: 1
   _groundLayer:
     serializedVersion: 2
     m_Bits: 128
@@ -817,6 +817,7 @@ MonoBehaviour:
     moveSpeed: 5
     jumpForce: 8
     gold: 100
+    score: 0
   playerView: {fileID: 701438870750755338}
   playerInformationTab: {fileID: 3733386365343193049}
   playerModel_Dongeon:
@@ -838,6 +839,14 @@ MonoBehaviour:
   bulletIndex: 6
   skill: {fileID: 4777081729256371218, guid: 8c6d1baccb7cab04e837acab7a1cbc20, type: 3}
   usingSkillMp: 20
+  effectAudios:
+  - {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
+  - {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
+  - {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
+  - {fileID: 8300000, guid: f11db4559b3ffff45b62e9327fc5535d, type: 3}
+  - {fileID: 8300000, guid: cabfae866cab347928b74b7d0ca6bfa9, type: 3}
+  - {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+  - {fileID: 8300000, guid: 490bfbc72255342408984f60044487de, type: 3}
   layerMask:
     serializedVersion: 2
     m_Bits: 64

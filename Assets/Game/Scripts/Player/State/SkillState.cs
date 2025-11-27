@@ -55,7 +55,6 @@ public class SkillState : IPlayerState
         Quaternion rot = Quaternion.Euler(0f, 0f, angle);
 
         GameObject mybullet = BulletManager.Instance.GetBullet(_player.BulletIndex);
-
         if (mybullet != null)
         {
             //Debug.Log("가져와서 사용 "+mybullet.name);
@@ -69,6 +68,7 @@ public class SkillState : IPlayerState
             Debug.Log("없어서 사용");
             mybullet = UnityEngine.Object.Instantiate(_player.Skill, playerPosition, rot);
         }
+        SoundManager.Instance.PlayEffect(_player.EffectAudios[3]);
         mybullet.GetComponent<Bullet>().SetBullet(_player.playerModel_Dongeon.ReturnTotalStatus(1)*1.5f, _player.playerModel_Dongeon.ReturnTotalStatus(3));
 
     }

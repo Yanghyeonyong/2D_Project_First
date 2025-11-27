@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using static UnityEditor.Experimental.GraphView.GraphView;
 
@@ -20,6 +21,11 @@ public class EnemyController : MonoBehaviour
 
     [SerializeField] bool isDie = false;
     public bool IsDie => isDie;
+
+
+    [SerializeField] AudioClip[] effectAudios;
+    public AudioClip[] EffectAudios => effectAudios;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -40,6 +46,7 @@ public class EnemyController : MonoBehaviour
 
     public void OnTakeDamage(float takeDamage)
     {
+        SoundManager.Instance.PlayEffect(effectAudios[1]);
         if (enemyModel.TakeDamage(takeDamage))
         {
             enemyView.UpdateEnemyHP(enemyModel.CurHp / enemyModel.MaxHp);
@@ -75,5 +82,13 @@ public class EnemyController : MonoBehaviour
     public void EnemyUpgrade(float upgradeRate)
     {
         enemyModel.EnemyUpgrade(upgradeRate);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.layer == 8)
+        {
+            collision.gameObject.GetComponent<PlayerController_State>().OnTakeDamage(enemyModel.Damage);
+        }
     }
 }

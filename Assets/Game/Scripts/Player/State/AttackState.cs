@@ -22,6 +22,7 @@ public class AttackState : IPlayerState
     public void OnEnter()
     {
         _anim.SetTrigger("IsAttack");
+        SoundManager.Instance.PlayEffect(_player.EffectAudios[0]);
         RaycastHit2D[] hit = CheckEnemy();
         foreach (RaycastHit2D enemy in hit)
         {

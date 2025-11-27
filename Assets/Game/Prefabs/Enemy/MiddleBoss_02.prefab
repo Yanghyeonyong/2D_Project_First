@@ -252,6 +252,9 @@ MonoBehaviour:
   bullet: {fileID: 3379907828377074008, guid: 305012746dffc834698a5f8520a43dc3, type: 3}
   spawnPos: {fileID: 4948367583433065311}
   isDie: 0
+  effectAudios:
+  - {fileID: 8300000, guid: 323e15cfe809e114ab92c9f4b25e8bc2, type: 3}
+  - {fileID: 8300000, guid: df7087e4d8a8bb546bc08ce68632903f, type: 3}
   dieAnimationTime: 1
 --- !u!114 &8055234868505345864
 MonoBehaviour:
