@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Timers;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
 
 
 public class CrouchState : MonoBehaviour, IPlayerState 

@@ -2,7 +2,6 @@ using System;
 using Unity.Behavior;
 using Unity.Properties;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 //using static UnityEditor.Experimental.GraphView.GraphView;
 using static UnityEngine.RuleTile.TilingRuleOutput;
