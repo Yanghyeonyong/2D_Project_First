@@ -2395,7 +2395,9 @@ MonoBehaviour:
   initialPlayerData: {fileID: 11400000, guid: 7d5d1caab9df890448892fa987d87679, type: 2}
   playerData: {fileID: 1462544996}
   player: {fileID: 2631451431042319544, guid: 4eb5360aeacd8d144b0068a7b0517dfc, type: 3}
-  playerSpawnPos: {fileID: 0}
+  playerSpawnPos:
+  - {x: 0, y: 0, z: 0}
+  - {x: -40, y: -6, z: 0}
   playerCamera: {fileID: 3633603253027185542, guid: 8e5a382c93715de43846ed6896ccb8a5, type: 3}
 --- !u!4 &1462544995
 Transform:

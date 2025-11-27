@@ -32,6 +32,9 @@ public class PlayerModel
     [SerializeField] private int gold = 0;
     public int Gold=>gold;
 
+    [SerializeField] private float score = 0;
+    public float Score => score;
+
 
     public event Action<float> OnHealthChange;
     public event Action<int> OnPlayerJump;
@@ -122,4 +125,10 @@ public class PlayerModel
     {
         gold += getGold;
     }
+
+    public void SetBestScore(float curScore)
+    {
+        score = MathF.Max(score, curScore);
+    }
+
 }

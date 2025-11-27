@@ -24,7 +24,7 @@ public class GameManager : Singleton<GameManager>
     public PlayerData_JSON playerData;
 
     [SerializeField] GameObject player;
-    [SerializeField] Transform playerSpawnPos;
+    [SerializeField] Vector3[] playerSpawnPos;
     [SerializeField] GameObject playerCamera;
     private bool isInvincible = false;
     public bool IsInvincible
@@ -69,7 +69,8 @@ public class GameManager : Singleton<GameManager>
 
         if (curStage > 0 && curStage < 3)
         {
-            GameObject myPlayer = Instantiate(player, new Vector3(0, 1, 0), Quaternion.identity);
+            //GameObject myPlayer = Instantiate(player, new Vector3(0, 1, 0), Quaternion.identity);
+            GameObject myPlayer = Instantiate(player, playerSpawnPos[curStage - 1], Quaternion.identity);
             GameObject myCamera = Instantiate(playerCamera);
             myCamera.GetComponent<CinemachineCamera>().Target.TrackingTarget = myPlayer.transform;
             UIManager.Instance.OnOffUI(UIManager.Instance.title, true);

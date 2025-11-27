@@ -167,6 +167,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3088148248052574867, guid: 5bb9ce5d01dfcc84b851057b3ed65c3d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7349000156018770180, guid: 5bb9ce5d01dfcc84b851057b3ed65c3d, type: 3}
       propertyPath: m_Name
       value: ThirdMob_1
@@ -477,6 +481,10 @@ PrefabInstance:
     - target: {fileID: 7383425439167741645, guid: 243b26df0b7618e4d8f667451a8a69bb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8920296473598539526, guid: 243b26df0b7618e4d8f667451a8a69bb, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -869,6 +877,10 @@ PrefabInstance:
     - target: {fileID: 528319849956901594, guid: 61e14452f05bd7846be1497282d1e784, type: 3}
       propertyPath: m_Name
       value: ThirdMob_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1403003268424736039, guid: 61e14452f05bd7846be1497282d1e784, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4691869357310635882, guid: 61e14452f05bd7846be1497282d1e784, type: 3}
       propertyPath: 'managedReferences[4403704092411560195].m_Value.Array.data[0]'
@@ -1333,7 +1345,7 @@ MonoBehaviour:
   initialPlayerData: {fileID: 0}
   playerData: {fileID: 0}
   player: {fileID: 2631451431042319544, guid: a9aeee0ca3687c5488cb7f964a32c176, type: 3}
-  playerSpawnPos: {fileID: 0}
+  playerSpawnPos: []
   playerCamera: {fileID: 0}
 --- !u!4 &322066325
 Transform:
@@ -1564,6 +1576,10 @@ PrefabInstance:
     - target: {fileID: 5807741978843997273, guid: b53212bc97a5a064ca4dbdf07f140cca, type: 3}
       propertyPath: m_SortingOrder
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6172765069726647333, guid: b53212bc97a5a064ca4dbdf07f140cca, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6856276387169387832, guid: b53212bc97a5a064ca4dbdf07f140cca, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1975,6 +1991,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1128475197949895387, guid: d71448fdfd6754844a7838aec445227b, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4266056723711872660, guid: d71448fdfd6754844a7838aec445227b, type: 3}
       propertyPath: 'managedReferences[4403704092411560194].m_Value.Array.data[0]'
       value: 
@@ -2057,6 +2077,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1471400077}
     m_Modifications:
+    - target: {fileID: 2096376415035155443, guid: 360584c6749d93f49b4e5161e517d165, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2649691010867387395, guid: 360584c6749d93f49b4e5161e517d165, type: 3}
       propertyPath: m_SortingOrder
       value: 8
@@ -2547,6 +2571,10 @@ PrefabInstance:
     - target: {fileID: 80156940828998019, guid: 53c08751a2de70640b65a06284967171, type: 3}
       propertyPath: m_Name
       value: FirstMob_0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2050638769549686791, guid: 53c08751a2de70640b65a06284967171, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3637409673550128885, guid: 53c08751a2de70640b65a06284967171, type: 3}
       propertyPath: 'managedReferences[4403704092411560187].m_Value.Array.data[0]'
@@ -3921,6 +3949,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3088148248052574867, guid: 5bb9ce5d01dfcc84b851057b3ed65c3d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7349000156018770180, guid: 5bb9ce5d01dfcc84b851057b3ed65c3d, type: 3}
       propertyPath: m_Name
       value: ThirdMob_1
@@ -4148,6 +4180,10 @@ PrefabInstance:
     - target: {fileID: 6810714744014796657, guid: 04a98218ed27e0646b895a373c16b437, type: 3}
       propertyPath: m_SortingOrder
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469239234416974045, guid: 04a98218ed27e0646b895a373c16b437, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4416,6 +4452,10 @@ PrefabInstance:
     - target: {fileID: 5137430165188031948, guid: 549a832c6a0fd6a44add6847c47a5084, type: 3}
       propertyPath: m_SortingOrder
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8102017214549649676, guid: 549a832c6a0fd6a44add6847c47a5084, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8740966504072440494, guid: 549a832c6a0fd6a44add6847c47a5084, type: 3}
       propertyPath: 'managedReferences[4403704092411560195].m_Value.Array.data[0]'
@@ -4714,6 +4754,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 2063664142782893269, guid: a3d7acce90b8835408bd8d3b843f93a9, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3252175403003122820, guid: a3d7acce90b8835408bd8d3b843f93a9, type: 3}
       propertyPath: m_Name
       value: ThirdMob_0
@@ -4882,6 +4926,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 8102017214549649676, guid: 549a832c6a0fd6a44add6847c47a5084, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8740966504072440494, guid: 549a832c6a0fd6a44add6847c47a5084, type: 3}
       propertyPath: 'managedReferences[4403704092411560195].m_Value.Array.data[0]'
       value: 
@@ -5030,6 +5078,10 @@ PrefabInstance:
       propertyPath: 'managedReferences[4403704092411560195].m_Value.Array.data[1]'
       value: 
       objectReference: {fileID: 1750160079}
+    - target: {fileID: 7836405774682208998, guid: b5940278edaf2f9408d139b9ee7f1625, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8585731725056144795, guid: b5940278edaf2f9408d139b9ee7f1625, type: 3}
       propertyPath: m_Name
       value: MiddleBoss_01
@@ -5352,6 +5404,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8920296473598539526, guid: 243b26df0b7618e4d8f667451a8a69bb, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5623,6 +5679,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6172765069726647333, guid: b53212bc97a5a064ca4dbdf07f140cca, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6856276387169387832, guid: b53212bc97a5a064ca4dbdf07f140cca, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4.4403124
@@ -5716,6 +5776,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2086598064}
     m_Modifications:
+    - target: {fileID: 2096376415035155443, guid: 360584c6749d93f49b4e5161e517d165, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2649691010867387395, guid: 360584c6749d93f49b4e5161e517d165, type: 3}
       propertyPath: m_SortingOrder
       value: 8
@@ -5852,6 +5916,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6669822236700801475, guid: 43f16b269b7faca4398610040c5dc5e7, type: 3}
       propertyPath: dieAnimationTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7631160074281796874, guid: 43f16b269b7faca4398610040c5dc5e7, type: 3}
+      propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8907703178797003199, guid: 43f16b269b7faca4398610040c5dc5e7, type: 3}
@@ -6016,6 +6084,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1128475197949895387, guid: d71448fdfd6754844a7838aec445227b, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4266056723711872660, guid: d71448fdfd6754844a7838aec445227b, type: 3}
       propertyPath: 'managedReferences[4403704092411560194].m_Value.Array.data[0]'
       value: 
@@ -6146,6 +6218,10 @@ PrefabInstance:
       propertyPath: 'managedReferences[4403704092411560195].m_Value.Array.data[1]'
       value: 
       objectReference: {fileID: 1616074629}
+    - target: {fileID: 7836405774682208998, guid: b5940278edaf2f9408d139b9ee7f1625, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8585731725056144795, guid: b5940278edaf2f9408d139b9ee7f1625, type: 3}
       propertyPath: m_Name
       value: MiddleBoss_01
@@ -6357,6 +6433,10 @@ PrefabInstance:
       propertyPath: m_SortingOrder
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 7631160074281796874, guid: 43f16b269b7faca4398610040c5dc5e7, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6409,6 +6489,10 @@ PrefabInstance:
     - target: {fileID: 528319849956901594, guid: 61e14452f05bd7846be1497282d1e784, type: 3}
       propertyPath: m_Name
       value: ThirdMob_2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1403003268424736039, guid: 61e14452f05bd7846be1497282d1e784, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4691869357310635882, guid: 61e14452f05bd7846be1497282d1e784, type: 3}
       propertyPath: 'managedReferences[4403704092411560195].m_Value.Array.data[0]'
@@ -6844,6 +6928,10 @@ PrefabInstance:
     - target: {fileID: 1341028888779430856, guid: a3d7acce90b8835408bd8d3b843f93a9, type: 3}
       propertyPath: m_SortingOrder
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2063664142782893269, guid: a3d7acce90b8835408bd8d3b843f93a9, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3252175403003122820, guid: a3d7acce90b8835408bd8d3b843f93a9, type: 3}
       propertyPath: m_Name
@@ -7313,6 +7401,10 @@ PrefabInstance:
     - target: {fileID: 6810714744014796657, guid: 04a98218ed27e0646b895a373c16b437, type: 3}
       propertyPath: m_SortingOrder
       value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7469239234416974045, guid: 04a98218ed27e0646b895a373c16b437, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

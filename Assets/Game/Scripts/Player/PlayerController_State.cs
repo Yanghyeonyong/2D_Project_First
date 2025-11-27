@@ -325,10 +325,11 @@ public class PlayerController_State : MonoBehaviour
 
             if (!isDie)
             {
+                //현재 tower 맵 시작 위치가 -6.xxx부터 시작하여 + 6 
+                playerModel.SetBestScore(pos.position.y + 6);
                 rb.linearVelocity = Vector2.zero;
                 Debug.Log("현재 체력 : " + playerModel.CurHp);
                 StartCoroutine(playerView.DieAnimation(dieAnimationTime));
-
             }
         }
     }
